@@ -1,11 +1,31 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+/*
+ * MenuPrincipal.java
+ *
+ * Created on 16-oct-2013, 20:33:49
+ */
 package Interfaz;
 
+import dominio.Sistema;
+
+/**
+ *
+ * @author Palmera
+ */
 public class MenuPrincipal extends javax.swing.JFrame {
 
+    Sistema data;
     /** Creates new form MenuPrincipal */
     public MenuPrincipal() {
         initComponents();
+        
+        data = new Sistema();
+        data.cargarData(data.getActividades());
+        int i = 0;
     }
 
     /** This method is called from within the constructor to
@@ -17,23 +37,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/uruguay_departamentos.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addContainerGap(73, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -75,6 +89,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
