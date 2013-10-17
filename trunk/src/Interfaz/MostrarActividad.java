@@ -4,20 +4,24 @@
  */
 
 /*
- * MostrarActividad.java
+ * prueba.java
  *
- * Created on 16-oct-2013, 16:47:57
+ * Created on 17-oct-2013, 10:13:12
  */
 package Interfaz;
+
+import dominio.Actividad;
+import java.util.ArrayList;
 
 /**
  *
  * @author Palmera
  */
-public class MostrarActividad extends javax.swing.JFrame {
+public class MostrarActividad extends javax.swing.JDialog {
 
-    /** Creates new form MostrarActividad */
-    public MostrarActividad() {
+    /** Creates new form prueba */
+    public MostrarActividad(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividad) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -30,7 +34,7 @@ public class MostrarActividad extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,10 +50,7 @@ public class MostrarActividad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
