@@ -12,6 +12,7 @@ package Interfaz;
 
 import dominio.Actividad;
 import dominio.Sistema;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,22 +32,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /** Creates new form MenuPrincipal */
     public MenuPrincipal() {
         initComponents();
-
+        this.getContentPane().setBackground(Color.WHITE);
         data = new Sistema();
         data.cargarData(data.getActividades());
         
-        String rutaPlaya = "/Interfaz/imagenes/playa_icono.jpg";
-        JButton playaBoton = crearBoton(rutaPlaya, 10, 10, "Playas");
+        String rutaPlaya = "/Interfaz/imagenes/playa_icono.png";
+        JButton playaBoton = crearBoton(rutaPlaya, 10, 30, "Playas");
         add(playaBoton);
 
         
-        String rutaBares = "/Interfaz/imagenes/bar_icono.jpg";
-        JButton baresBoton = crearBoton(rutaBares, 320, 10, "Bares");
+        String rutaBares = "/Interfaz/imagenes/bares_icono.png";
+        JButton baresBoton = crearBoton(rutaBares, 160, 30, "Bares");
         add(baresBoton);
 
-        String rutaRestaurantes = "/Interfaz/imagenes/restaurantes_icono.jpg";
-        JButton restaurantesBoton = crearBoton(rutaRestaurantes, 10, 320, "Restaurantes");
+        String rutaRestaurantes = "/Interfaz/imagenes/restaurantes_icono.png";
+        JButton restaurantesBoton = crearBoton(rutaRestaurantes, 10, 180, "Restaurantes");
         add(restaurantesBoton);
+
+        String rutaFavoritos = "/Interfaz/imagenes/favoritos_icono.png";
+        JButton favoritosBoton = crearBoton(rutaFavoritos, 310, 30, "Favoritos");
+        add(favoritosBoton);
+        
+        String rutaHeladeria = "/Interfaz/imagenes/heladeria_icono.png";
+        JButton heladeriaBoton = crearBoton(rutaHeladeria, 160, 180, "Heladerias");
+        add(heladeriaBoton);
 
 
 
@@ -54,18 +63,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     public JButton crearBoton(String rutaImagen, int x, int y, String tipo) {
         JButton boton = new JButton();
-        boton.setBounds(x, y, 300, 300);
+        boton.setBounds(x, y, 150, 150);
         ImageIcon iconoBoton = new javax.swing.ImageIcon(getClass().getResource(rutaImagen));
         Image imagen = iconoBoton.getImage();
         Image resizedImage = imagen.getScaledInstance(boton.getWidth(), boton.getHeight(), 0);
         boton.setIcon(new ImageIcon(resizedImage));
         boton.setVisible(true);
+        final String tipoActividad = tipo;
         boton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Actividad> actividades = new ArrayList<>();
-                actividades = data.getPlayas();
+                for (int i = 0; i < data.getActividades().size(); i++) {
+                    switch (tipoActividad){
+                        case "Playas":
+                            actividades = data.getPlayas();
+                            break;
+                        case "Bares":
+                            actividades = data.getBares();
+                            break;
+                        case "Heladerias":
+                            actividades = data.getHeladerias();
+                            break;
+                        case "Favoritos":
+                            actividades = data.getFavoritos();
+                            break;
+                    }
+                }
+                
                 MostrarActividad actividad = new MostrarActividad(null, false, actividades);
                 actividad.setVisible(true);
                 //throw new UnsupportedOperationException("Not supported yet.");
@@ -83,18 +109,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Seleccione categoria para empezar su busqueda:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(498, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,5 +172,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,7 +11,10 @@
 package Interfaz;
 
 import dominio.Actividad;
+import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,6 +26,14 @@ public class MostrarActividad extends javax.swing.JDialog {
     public MostrarActividad(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividad) {
         super(parent, modal);
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
+        String tipoActividad = actividad.get(0).getTipo();
+        tipoLabel.setText(tipoActividad);
+        setResizable(false);
+        Image imagen = actividad.get(0).getImg();
+        Image resizedImage = imagen.getScaledInstance(this.getWidth(), 300, 0);
+        imagenLabel.setIcon(new ImageIcon(resizedImage));
+        //imagenLabel.setBounds(0, 30, this.getWidth(), 300);
     }
 
     /** This method is called from within the constructor to
@@ -34,17 +45,30 @@ public class MostrarActividad extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tipoLabel = new javax.swing.JLabel();
+        imagenLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        tipoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        tipoLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tipoLabel)
+                .addContainerGap(286, Short.MAX_VALUE))
+            .addComponent(imagenLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tipoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imagenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         pack();
@@ -52,5 +76,7 @@ public class MostrarActividad extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel imagenLabel;
+    private javax.swing.JLabel tipoLabel;
     // End of variables declaration//GEN-END:variables
 }
