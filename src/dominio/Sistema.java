@@ -22,8 +22,8 @@ public class Sistema {
     private ArrayList<Actividad> favoritos;
 
     public Sistema() {
-        this.actividades = new ArrayList<Actividad>();
-        this.favoritos = new ArrayList<Actividad>();
+        this.actividades = new ArrayList<>();
+        this.favoritos = new ArrayList<>();
         
     }
 
@@ -48,14 +48,35 @@ public class Sistema {
         
         String descripcionBikini = "";
       
-        Actividad bikini = new Actividad("playa", "playa bikini",descripcionBikini, null);
+        Actividad bikini = new Actividad("Playa", "playa bikini",descripcionBikini, null);
 
         String descripcionArlechino = "";
-        Actividad arlechino = new Actividad("heladeria","heladeria are¡lechino", descripcionArlechino, null);
+        Actividad arlechino = new Actividad("Heladeria","heladeria are¡lechino", descripcionArlechino, null);
         
         actividades.add(bikini);
         actividades.add(arlechino);
 
 
+    }
+    public ArrayList<Actividad> getBares(){
+        ArrayList<Actividad> retorno = new ArrayList<>();
+        for (int i = 0; i < this.actividades.size(); i++) {
+            Actividad actividad = this.actividades.get(i);
+            String tipo = actividad.getTipo();
+            if(tipo.equals("Bar"))
+                retorno.add(actividad);
+        }
+        return retorno;
+    }
+    
+    public ArrayList<Actividad> getPlayas(){
+        ArrayList<Actividad> retorno = new ArrayList<>();
+        for (int i = 0; i < this.actividades.size(); i++) {
+            Actividad actividad = this.actividades.get(i);
+            String tipo = actividad.getTipo();
+            if(tipo.equals("Playa"))
+                retorno.add(actividad);
+        }
+        return retorno;
     }
 }

@@ -10,7 +10,15 @@
  */
 package Interfaz;
 
+import dominio.Actividad;
 import dominio.Sistema;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,13 +27,51 @@ import dominio.Sistema;
 public class MenuPrincipal extends javax.swing.JFrame {
 
     Sistema data;
+
     /** Creates new form MenuPrincipal */
     public MenuPrincipal() {
         initComponents();
-        
+
         data = new Sistema();
         data.cargarData(data.getActividades());
-        int i = 0;
+        
+        String rutaPlaya = "/Interfaz/imagenes/playa_icono.jpg";
+        JButton playaBoton = crearBoton(rutaPlaya, 10, 10, "Playas");
+        add(playaBoton);
+
+        
+        String rutaBares = "/Interfaz/imagenes/bar_icono.jpg";
+        JButton baresBoton = crearBoton(rutaBares, 320, 10, "Bares");
+        add(baresBoton);
+
+        String rutaRestaurantes = "/Interfaz/imagenes/restaurantes_icono.jpg";
+        JButton restaurantesBoton = crearBoton(rutaRestaurantes, 10, 320, "Restaurantes");
+        add(restaurantesBoton);
+
+
+
+    }
+
+    public JButton crearBoton(String rutaImagen, int x, int y, String tipo) {
+        JButton boton = new JButton();
+        boton.setBounds(x, y, 300, 300);
+        ImageIcon iconoBoton = new javax.swing.ImageIcon(getClass().getResource(rutaImagen));
+        Image imagen = iconoBoton.getImage();
+        Image resizedImage = imagen.getScaledInstance(boton.getWidth(), boton.getHeight(), 0);
+        boton.setIcon(new ImageIcon(resizedImage));
+        boton.setVisible(true);
+        boton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Actividad> actividades = new ArrayList<>();
+                actividades = data.getPlayas();
+                MostrarActividad actividad = new MostrarActividad(null, false, actividades);
+                actividad.setVisible(true);
+                //throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+        return boton;
     }
 
     /** This method is called from within the constructor to
@@ -38,16 +84,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 531, Short.MAX_VALUE)
         );
 
         pack();
