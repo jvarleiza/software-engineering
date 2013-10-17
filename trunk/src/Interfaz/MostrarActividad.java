@@ -47,11 +47,20 @@ public class MostrarActividad extends javax.swing.JDialog {
 
         tipoLabel = new javax.swing.JLabel();
         imagenLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaActividades = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tipoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        tipoLabel.setFont(new java.awt.Font("Tahoma", 0, 36));
         tipoLabel.setText("jLabel1");
+
+        listaActividades.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listaActividades);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,6 +69,7 @@ public class MostrarActividad extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tipoLabel)
                 .addContainerGap(286, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addComponent(imagenLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -67,8 +77,9 @@ public class MostrarActividad extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tipoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imagenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addComponent(imagenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -77,6 +88,8 @@ public class MostrarActividad extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imagenLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaActividades;
     private javax.swing.JLabel tipoLabel;
     // End of variables declaration//GEN-END:variables
 }

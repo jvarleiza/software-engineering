@@ -72,6 +72,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         final String tipoActividad = tipo;
         boton.addActionListener(new ActionListener() {
 
+            //cuando hacen click en el boton, filtra las actividades correspondientes
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Actividad> actividades = new ArrayList<>();
