@@ -12,7 +12,9 @@ package Interfaz;
 
 import dominio.Actividad;
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,14 +22,23 @@ import java.util.ArrayList;
  */
 public class Buscador extends javax.swing.JDialog {
 
-    private ArrayList<Actividad> actividades;
+    private ArrayList<Actividad> actividadesLocal;
+    private ArrayList<Actividad> resultados;
     /** Creates new form Buscador */
     public Buscador(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividades) {
         super(parent, modal);
         initComponents();
+        comentariosList.setVisible(false);
         this.getContentPane().setBackground(Color.WHITE);
         this.setResizable(false);
-        actividades = actividades;
+        actividadesLocal = actividades;
+        String[] nombres = new String[actividades.size()];
+        for (int i = 0; i < actividades.size(); i++) {
+            String nombre = actividades.get(i).getNombre();
+            nombres[i] = nombre;
+        }
+        buscadorList.setListData(nombres);
+        
 
     }
 
@@ -54,9 +65,19 @@ public class Buscador extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        buscadorList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscadorListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(buscadorList);
 
         buscadorImagenLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/2_action_search.png"))); // NOI18N
+        buscadorImagenLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscadorImagenLabelMouseClicked(evt);
+            }
+        });
 
         buscadorTextField.setToolTipText("");
         buscadorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -67,7 +88,7 @@ public class Buscador extends javax.swing.JDialog {
 
         infoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 36)); // NOI18N
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 36));
         nombreLabel.setText("Seleccione resultado");
 
         descripcionTextArea.setColumns(20);
@@ -90,10 +111,10 @@ public class Buscador extends javax.swing.JDialog {
             .addGroup(infoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nombreLabel)
-                .addContainerGap(388, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
-            .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+            .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,9 +161,65 @@ public class Buscador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscadorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTextFieldKeyTyped
-        String buscar = buscadorTextField.getText();
+        String buscar = buscadorTextField.getText().toLowerCase();
+        resultados = new ArrayList<>();
+        boolean enter = false;
+        if(evt.getKeyChar()!='\b'){
+            buscar = buscadorTextField.getText()+evt.getKeyChar();
+        }
+        if(evt.getKeyChar()=='\n'){
+            buscar = buscadorTextField.getText();
+            enter = true;
+        }
+        
+        if (enter==false) {
+            for (int i = 0; i < actividadesLocal.size(); i++) {
+                Actividad act = actividadesLocal.get(i);
+                String nombre = act.getNombre().toLowerCase();
+                if (nombre.contains(buscar.toLowerCase())) {
+                    resultados.add(act);
+                }
+            }
+        } else {
+            for (int i = 0; i < actividadesLocal.size(); i++) {
+                Actividad act = actividadesLocal.get(i);
+                String nombre = act.getNombre().toLowerCase();
+                String descripcion = act.getDescripcion().toLowerCase();
+                if (nombre.contains(buscar.toLowerCase())||descripcion.contains(buscar.toLowerCase())) {
+                    resultados.add(act);
+                }
+            }
+        }
+        String[] nombres = new String[resultados.size()];
+        for (int i = 0; i < resultados.size(); i++) {
+            String nombre = resultados.get(i).getNombre();
+            nombres[i] = nombre;
+        }
+        buscadorList.setListData(nombres);
+        
         
     }//GEN-LAST:event_buscadorTextFieldKeyTyped
+
+    private void buscadorImagenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscadorImagenLabelMouseClicked
+        buscadorTextFieldKeyTyped(null);
+    }//GEN-LAST:event_buscadorImagenLabelMouseClicked
+
+    private void buscadorListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscadorListMouseClicked
+        int posActividadSeleccionada = buscadorList.getSelectedIndex();
+        Actividad act;
+        if(resultados!=null){
+            act = resultados.get(posActividadSeleccionada);
+        }else{
+            act = actividadesLocal.get(posActividadSeleccionada);
+        }
+        
+        nombreLabel.setText(act.getNombre());
+        descripcionTextArea.setText(act.getDescripcion());
+        
+        Image foto = act.getImg();
+        Image resizedMapa = foto.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(),0);
+        mapaLabel.setIcon(new ImageIcon(resizedMapa));
+    }//GEN-LAST:event_buscadorListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

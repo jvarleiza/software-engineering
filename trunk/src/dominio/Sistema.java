@@ -38,16 +38,17 @@ public class Sistema {
         //String descripcionBikini = "";
         //ImageIcon iconoBoton = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/playa_bikini.jpg"));
      //   Actividad bikini = new Actividad("Playa", "playa bikini",descripcionBikini, null, iconoBoton.getImage());
-
+/*
         String descripcionArlechino = "";
         ImageIcon iconoArlechino = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/Arlecchino.gif"));
         Actividad arlechino = new Actividad("Heladeria","heladeria Arlecchino", descripcionArlechino, null, iconoArlechino.getImage(), null);
         
        // actividades.add(bikini);
         actividades.add(arlechino);
-
+*/
 
     }
+    
     public ArrayList<Actividad> getBares(){
         ArrayList<Actividad> retorno = new ArrayList<>();
         for (int i = 0; i < this.actividades.size(); i++) {
@@ -91,6 +92,7 @@ public class Sistema {
         }
         return retorno;
     }
+    
     public ArrayList<Actividad> getFavoritos(){
         ArrayList<Actividad> retorno = new ArrayList<>();
         for (int i = 0; i < this.actividades.size(); i++) {

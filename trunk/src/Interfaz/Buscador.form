@@ -69,6 +69,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buscadorListMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -78,6 +81,9 @@
           <Image iconType="3" name="/Interfaz/imagenes/2_action_search.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buscadorImagenLabelMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="buscadorTextField">
       <Properties>
@@ -100,11 +106,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="nombreLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="388" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
-              <Component id="jScrollPane2" alignment="1" pref="758" max="32767" attributes="0"/>
-              <Component id="jScrollPane3" alignment="1" pref="758" max="32767" attributes="0"/>
-              <Component id="mapaLabel" alignment="1" pref="758" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" alignment="1" pref="380" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" alignment="1" pref="380" max="32767" attributes="0"/>
+              <Component id="mapaLabel" alignment="1" pref="380" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
