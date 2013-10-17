@@ -41,7 +41,7 @@ public class Sistema {
 
         String descripcionArlechino = "";
         ImageIcon iconoArlechino = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/Arlecchino.gif"));
-        Actividad arlechino = new Actividad("Heladeria","heladeria Arlecchino", descripcionArlechino, null, iconoArlechino.getImage());
+        Actividad arlechino = new Actividad("Heladeria","heladeria Arlecchino", descripcionArlechino, null, iconoArlechino.getImage(), null);
         
        // actividades.add(bikini);
         actividades.add(arlechino);
