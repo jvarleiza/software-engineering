@@ -15,26 +15,26 @@ public class Actividad {
     
     private String tipo;
     private String nombre;
+    private String descripcion;
+    private ArrayList<Comentario> comentarios;
+    private boolean favorito;
+    private Image img;
 
+
+    public Actividad(String tipo, String nombre, String descripcion, ArrayList<Comentario> comentarios, Image img) {
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.comentarios = comentarios;
+        this.favorito = false;
+        this.nombre = nombre;
+        this.img = img;
+    }
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    private String descripcion;
-    private ArrayList<Comentario> comentarios;
-    private boolean favorito;
-   // private Image img;
-
-    public Actividad(String tipo, String nombre, String descripcion, ArrayList<Comentario> comentarios) {
-        this.tipo = tipo;
-        this.descripcion = descripcion;
-        this.comentarios = comentarios;
-        this.favorito = false;
-        this.nombre = nombre;
-     //   this.img = img;
     }
 
     public ArrayList<Comentario> getComentarios() {
@@ -61,13 +61,13 @@ public class Actividad {
         this.favorito = favorito;
     }
 
-   /* public Image getImg() {
+    public Image getImg() {
         return img;
     }
 
     public void setImg(Image img) {
         this.img = img;
-    }*/
+    }
 
     public String getTipo() {
         return tipo;
