@@ -20,12 +20,14 @@ import java.util.ArrayList;
  */
 public class Buscador extends javax.swing.JDialog {
 
+    private ArrayList<Actividad> actividades;
     /** Creates new form Buscador */
     public Buscador(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividades) {
         super(parent, modal);
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.setResizable(false);
+        actividades = actividades;
 
     }
 
@@ -39,7 +41,7 @@ public class Buscador extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        buscadorList = new javax.swing.JList();
         buscadorImagenLabel = new javax.swing.JLabel();
         buscadorTextField = new javax.swing.JTextField();
         infoPanel = new javax.swing.JPanel();
@@ -52,16 +54,16 @@ public class Buscador extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(buscadorList);
 
         buscadorImagenLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/2_action_search.png"))); // NOI18N
 
         buscadorTextField.setToolTipText("");
+        buscadorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscadorTextFieldKeyTyped(evt);
+            }
+        });
 
         infoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -137,14 +139,19 @@ public class Buscador extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buscadorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTextFieldKeyTyped
+        String buscar = buscadorTextField.getText();
+        
+    }//GEN-LAST:event_buscadorTextFieldKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel buscadorImagenLabel;
+    private javax.swing.JList buscadorList;
     private javax.swing.JTextField buscadorTextField;
     private javax.swing.JList comentariosList;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JPanel infoPanel;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
