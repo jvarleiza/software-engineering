@@ -19,16 +19,27 @@ public class Actividad {
     private ArrayList<Comentario> comentarios;
     private boolean favorito;
     private Image img;
+    private Image mapa;
 
 
-    public Actividad(String tipo, String nombre, String descripcion, ArrayList<Comentario> comentarios, Image img) {
+    public Actividad(String tipo, String nombre, String descripcion, ArrayList<Comentario> comentarios, Image img, Image mapa) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.comentarios = comentarios;
         this.favorito = false;
         this.nombre = nombre;
         this.img = img;
+        this.mapa = mapa;
     }
+
+    public Image getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(Image mapa) {
+        this.mapa = mapa;
+    }    
+    
     public String getNombre() {
         return nombre;
     }

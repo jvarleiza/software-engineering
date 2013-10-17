@@ -37,8 +37,11 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
         descripcionTextArea.setText(actividad.get(0).getDescripcion());
         setResizable(false);
         Image imagen = actividad.get(0).getImg();
+        Image mapa = actividad.get(0).getMapa();
         Image resizedImage = imagen.getScaledInstance(this.getWidth()/2, 300, 0);
+        Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(),0);
         imagenLabel.setIcon(new ImageIcon(resizedImage));
+        mapaLabel.setIcon(new ImageIcon(resizedMapa));
         //imagenLabel.setBounds(0, 30, this.getWidth(), 300);
         String[] nombres = new String[actividad.size()];
         for (int i = 0; i < actividad.size(); i++) {
@@ -54,9 +57,12 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int seleccionado = listaActividades.getSelectedIndex();
+                Image mapa = act.get(seleccionado).getMapa();
                 Image imagen = act.get(seleccionado).getImg();
+                Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
                 Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), 300, 0);
                 imagenLabel.setIcon(new ImageIcon(resizedImage));
+                mapaLabel.setIcon(new ImageIcon(resizedMapa));
                 nombreLabel.setText(act.get(seleccionado).getNombre());
                 String descripcion = act.get(seleccionado).getDescripcion();
                 descripcionTextArea.setText(descripcion);
