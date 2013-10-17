@@ -85,35 +85,44 @@ public class Informacion {
     
     
     public void cargarRestaurantes(ArrayList<Actividad> listaAct) {
-        String desVirazon = "Ubicado a pasos del puerto de Punta del Este, sobre la mansa se disfruta de la vista a "
-                + "la Playa Mansa con una variedad amplia de platos: mariscos, pescados y carnes, arroces, tragos. "
-                + "Mirar también 'Lo De Tere' y 'Guappa'";        
-        Actividad virazon = new Actividad("Restaurante", "Virazón",desVirazon, null, null, null);
-        listaAct.add(virazon); 
-        
-        String desTere = "Ubicado a pasos del puerto de Punta del Este, sobre la mansa se disfruta de la vista a "
-                + "la Playa Mansa con una variedad amplia de platos: mariscos, pescados y carnes, arroces, tragos. "
-                + "Mirar también 'Virazon' y 'Guappa'";        
-        Actividad loDeTere = new Actividad("Restaurante", "Lo de Tere",desTere, null, null, null);
-        listaAct.add(loDeTere); 
-        
+        ImageIcon mapaGuappa = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/mapa_guappa.png"));
+        ImageIcon imagenGuappa = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/res_guappa.jpeg"));
         String desGuappa = "Ubicado a pasos del puerto de Punta del Este, sobre la mansa se disfruta de la vista a "
-                + "la Playa Mansa con una variedad amplia de platos: mariscos, pescados y carnes, arroces, tragos. "
-                + "Mirar también 'Lo De Tere' y 'Virazon'";       
-        Actividad guappa = new Actividad("Restaurante", "Guappa",desGuappa, null, null, null);
+                + "la Playa Mansa con una variedad amplia de platos: mariscos, pescados y carnes, arroces, tragos. ";       
+        Actividad guappa = new Actividad("Restaurante", "Guappa",desGuappa, null, imagenGuappa.getImage(), mapaGuappa.getImage());
         listaAct.add(guappa); 
         
         
+        ImageIcon mapaLau = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/mapa_lauberge.png"));
+        ImageIcon imagenLau = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/res_lauberge.jpg"));
         String desLau = "Conocida popularmente como la torre de los waffles es un hotel que ofrece excelente servicio "
                 + "de salón de té muy lujoso. Especial para ir con pareja.";       
-        Actividad lau = new Actividad("Restaurante", "L'Auberge",desLau, null, null, null);
+        Actividad lau = new Actividad("Restaurante", "L'Auberge",desLau, null, imagenLau.getImage(), mapaLau.getImage());
         listaAct.add(lau); 
         
         
+        ImageIcon mapaArtico = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/mapa_artico.png"));
+        ImageIcon imagenArtico = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/res_artico.jpg"));
         String desArtico = "Reconocido restaurant para comer ricos mariscos y pescados al borde del agua a la hora del "
                 + "almuerzo. Esta ubicado en el puerto de Punta del Este.";       
-        Actividad artico = new Actividad("Restaurante", "Artico",desArtico, null, null, null);
+        Actividad artico = new Actividad("Restaurante", "Artico",desArtico, null, imagenArtico.getImage(), mapaArtico.getImage());
         listaAct.add(artico);
+        
+        
+        ImageIcon mapaPizza = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/mapa_pizza.png"));
+        ImageIcon imagenPizza = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/res_pizzasing.JPG"));
+        String desPizza = "Si le gusta el karaoke y le gusta la pizza, venga a Pizza Sing. Ubicada atrás del punta "
+                + "shopping se ubica la divertida pizzería.";       
+        Actividad pizza = new Actividad("Restaurante", "Pizza Sing",desPizza, null, imagenPizza.getImage(), mapaPizza.getImage());
+        listaAct.add(pizza);
+        
+        
+        ImageIcon mapaConrad = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/mapa_conrad.png"));
+        ImageIcon imagenConrad = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/res_conrad.jpg"));
+        String desConrad = "El restaurante del hotel/casino del conrad ofrece lujosos servicios para una elegante cena o almuerzo "
+                + "para aquellos que lo deseen. incluye mucha variedad de platos distintos.";       
+        Actividad conrad = new Actividad("Restaurante", "Conrad",desConrad, null, imagenConrad.getImage(), mapaConrad.getImage());
+        listaAct.add(conrad);
             
     }
     
