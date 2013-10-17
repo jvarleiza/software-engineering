@@ -33,14 +33,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
+        this.setResizable(false);
         data = new Sistema();
         data.cargarData(data.getActividades());
-        
+
         String rutaPlaya = "/Interfaz/imagenes/playa_icono.png";
         JButton playaBoton = crearBoton(rutaPlaya, 10, 30, "Playas");
         add(playaBoton);
 
-        
+
         String rutaBares = "/Interfaz/imagenes/bares_icono.png";
         JButton baresBoton = crearBoton(rutaBares, 160, 30, "Bares");
         add(baresBoton);
@@ -52,10 +53,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         String rutaFavoritos = "/Interfaz/imagenes/favoritos_icono.png";
         JButton favoritosBoton = crearBoton(rutaFavoritos, 310, 30, "Favoritos");
         add(favoritosBoton);
-        
+
         String rutaHeladeria = "/Interfaz/imagenes/heladeria_icono.png";
         JButton heladeriaBoton = crearBoton(rutaHeladeria, 160, 180, "Heladerias");
         add(heladeriaBoton);
+
+        String rutaCercaMio = "/Interfaz/imagenes/pin.png";
+        JButton cercaMioBoton = crearBoton(rutaCercaMio, 310, 180, "CM");
+        cercaMioBoton.setEnabled(false);
+        add(cercaMioBoton);
+
+        String rutaBuscador = "/Interfaz/imagenes/lupa.png";
+        JButton buscadorBoton = crearBoton(rutaBuscador, 160, 330, "Buscador");
+        add(buscadorBoton);
 
 
 
@@ -75,9 +85,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             //cuando hacen click en el boton, filtra las actividades correspondientes
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean buscador = false;
                 ArrayList<Actividad> actividades = new ArrayList<>();
                 for (int i = 0; i < data.getActividades().size(); i++) {
-                    switch (tipoActividad){
+                    switch (tipoActividad) {
                         case "Playas":
                             actividades = data.getPlayas();
                             break;
@@ -90,11 +101,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         case "Favoritos":
                             actividades = data.getFavoritos();
                             break;
+                        case "Restaurantes":
+                            actividades = data.getRestaurantes();
+                            break;
+                        case "Buscador":
+                            actividades = data.getActividades();
+                            buscador = true;
+                            break;
                     }
                 }
-                
-                MostrarActividad actividad = new MostrarActividad(null, false, actividades);
-                actividad.setVisible(true);
+                if (buscador == false) {
+                    MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, false, actividades);
+                    actividad.setVisible(true);
+                }else{
+                    Buscador buscadorVentana = new Buscador(null, false, actividades);
+                    buscadorVentana.setVisible(true);
+                }
                 //throw new UnsupportedOperationException("Not supported yet.");
             }
         });
@@ -113,8 +135,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Descubre Punta!");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel1.setText("Seleccione categoria para empezar su busqueda:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,14 +147,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addContainerGap(447, Short.MAX_VALUE))
         );
 
         pack();
