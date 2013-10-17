@@ -25,31 +25,33 @@ import javax.swing.event.ListSelectionListener;
  * @author Palmera
  */
 public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
-
+private ArrayList<Actividad> actividadLocal;
     /** Creates new form prueba */
     public MostrarActividadesPorFiltro(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividad) {
         super(parent, modal);
         initComponents();
+        comentariosList.setVisible(false);
+        actividadLocal = actividad;
         this.getContentPane().setBackground(Color.WHITE);
-        String tipoActividad = actividad.get(0).getTipo();
+        String tipoActividad = actividadLocal.get(0).getTipo();
         tipoLabel.setText(tipoActividad);
-        nombreLabel.setText(actividad.get(0).getNombre());
-        descripcionTextArea.setText(actividad.get(0).getDescripcion());
+        nombreLabel.setText(actividadLocal.get(0).getNombre());
+        descripcionTextArea.setText(actividadLocal.get(0).getDescripcion());
         setResizable(false);
-        Image imagen = actividad.get(0).getImg();
-        Image mapa = actividad.get(0).getMapa();
+        Image imagen = actividadLocal.get(0).getImg();
+        Image mapa = actividadLocal.get(0).getMapa();
         Image resizedImage = imagen.getScaledInstance(this.getWidth()/2, 300, 0);
         Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(),0);
         imagenLabel.setIcon(new ImageIcon(resizedImage));
         mapaLabel.setIcon(new ImageIcon(resizedMapa));
         //imagenLabel.setBounds(0, 30, this.getWidth(), 300);
-        String[] nombres = new String[actividad.size()];
-        for (int i = 0; i < actividad.size(); i++) {
-            String nombre = actividad.get(i).getNombre();
+        String[] nombres = new String[actividadLocal.size()];
+        for (int i = 0; i < actividadLocal.size(); i++) {
+            String nombre = actividadLocal.get(i).getNombre();
             nombres[i] = nombre;
         }
         listaActividades.setListData(nombres);
-        final ArrayList<Actividad> act = actividad;
+        
 
 
         listaActividades.addListSelectionListener(new ListSelectionListener() {
@@ -57,15 +59,16 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int seleccionado = listaActividades.getSelectedIndex();
-                Image mapa = act.get(seleccionado).getMapa();
-                Image imagen = act.get(seleccionado).getImg();
+                Image mapa = actividadLocal.get(seleccionado).getMapa();
+                Image imagen = actividadLocal.get(seleccionado).getImg();
                 Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
                 Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), 300, 0);
                 imagenLabel.setIcon(new ImageIcon(resizedImage));
                 mapaLabel.setIcon(new ImageIcon(resizedMapa));
-                nombreLabel.setText(act.get(seleccionado).getNombre());
-                String descripcion = act.get(seleccionado).getDescripcion();
+                nombreLabel.setText(actividadLocal.get(seleccionado).getNombre());
+                String descripcion = actividadLocal.get(seleccionado).getDescripcion();
                 descripcionTextArea.setText(descripcion);
+                favoritoCheckBox.setSelected(actividadLocal.get(seleccionado).isFavorito());
 
                 // throw new UnsupportedOperationException("Not supported yet.");
             }
@@ -94,11 +97,12 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
         descripcionTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         comentariosList = new javax.swing.JList();
+        favoritoCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Actividades");
 
-        tipoLabel.setFont(new java.awt.Font("MS UI Gothic", 0, 36)); // NOI18N
+        tipoLabel.setFont(new java.awt.Font("MS UI Gothic", 0, 36));
         tipoLabel.setText("jLabel1");
 
         listaActividades.setModel(new javax.swing.AbstractListModel() {
@@ -110,7 +114,7 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
 
         infoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 36)); // NOI18N
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 36));
         nombreLabel.setText("jLabel1");
 
         descripcionTextArea.setColumns(20);
@@ -126,6 +130,14 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(comentariosList);
 
+        favoritoCheckBox.setText("Favorito");
+        favoritoCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        favoritoCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                favoritoCheckBoxStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
@@ -136,7 +148,9 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
                     .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addGroup(infoPanelLayout.createSequentialGroup()
                         .addComponent(nombreLabel)
-                        .addContainerGap(232, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
         );
@@ -144,7 +158,9 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nombreLabel)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(favoritoCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mapaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -179,9 +195,21 @@ public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void favoritoCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_favoritoCheckBoxStateChanged
+        int seleccionado = listaActividades.getSelectedIndex();
+        Actividad seleccionada = actividadLocal.get(seleccionado);
+        if (favoritoCheckBox.isSelected()) {
+            seleccionada.setFavorito(favoritoCheckBox.isSelected());
+        }else{
+            seleccionada.setFavorito(favoritoCheckBox.isSelected());
+        }
+    }//GEN-LAST:event_favoritoCheckBoxStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList comentariosList;
     private javax.swing.JTextArea descripcionTextArea;
+    private javax.swing.JCheckBox favoritoCheckBox;
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JScrollPane jScrollPane1;

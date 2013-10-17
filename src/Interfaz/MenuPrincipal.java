@@ -44,6 +44,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         String rutaBares = "/Interfaz/imagenes/bares_icono.png";
         JButton baresBoton = crearBoton(rutaBares, 160, 30, "Bares");
+        baresBoton.setEnabled(false);
         add(baresBoton);
 
         String rutaRestaurantes = "/Interfaz/imagenes/restaurantes_icono.png";
@@ -56,6 +57,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         String rutaHeladeria = "/Interfaz/imagenes/heladeria_icono.png";
         JButton heladeriaBoton = crearBoton(rutaHeladeria, 160, 180, "Heladerias");
+        heladeriaBoton.setEnabled(false);
         add(heladeriaBoton);
 
         String rutaCercaMio = "/Interfaz/imagenes/pin.png";
