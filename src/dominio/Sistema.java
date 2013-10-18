@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dominio;
 
 import java.net.URL;
@@ -9,10 +6,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 
-/**
- *
- * @author Palmera
- */
 public class Sistema {
 
     private ArrayList<Actividad> actividades;
@@ -35,17 +28,7 @@ public class Sistema {
         Informacion info = new Informacion();
         info.cargarPlayas(actividad);
         info.cargarRestaurantes(actividad);
-        //String descripcionBikini = "";
-        //ImageIcon iconoBoton = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/playa_bikini.jpg"));
-     //   Actividad bikini = new Actividad("Playa", "playa bikini",descripcionBikini, null, iconoBoton.getImage());
-/*
-        String descripcionArlechino = "";
-        ImageIcon iconoArlechino = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/Arlecchino.gif"));
-        Actividad arlechino = new Actividad("Heladeria","heladeria Arlecchino", descripcionArlechino, null, iconoArlechino.getImage(), null);
-        
-       // actividades.add(bikini);
-        actividades.add(arlechino);
-*/
+
 
     }
     

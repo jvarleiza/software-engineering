@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,102 +35,118 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.setResizable(false);
+        this.setSize(480, 510);
         data = new Sistema();
         data.cargarData(data.getActividades());
+        crearBotonera();
 
+
+
+    }
+
+    public void crearBotonera() {
         String rutaPlaya = "/Interfaz/imagenes/playa_icono.png";
         JButton playaBoton = crearBoton(rutaPlaya, 10, 30, "Playas");
-        add(playaBoton);
+        this.add(playaBoton);
 
 
         String rutaBares = "/Interfaz/imagenes/bares_icono.png";
         JButton baresBoton = crearBoton(rutaBares, 160, 30, "Bares");
         baresBoton.setEnabled(false);
-        add(baresBoton);
+        this.add(baresBoton);
 
         String rutaRestaurantes = "/Interfaz/imagenes/restaurantes_icono.png";
         JButton restaurantesBoton = crearBoton(rutaRestaurantes, 10, 180, "Restaurantes");
-        add(restaurantesBoton);
+        this.add(restaurantesBoton);
 
         String rutaFavoritos = "/Interfaz/imagenes/favoritos_icono.png";
         JButton favoritosBoton = crearBoton(rutaFavoritos, 310, 30, "Favoritos");
-        add(favoritosBoton);
+        this.add(favoritosBoton);
 
         String rutaHeladeria = "/Interfaz/imagenes/heladeria_icono.png";
         JButton heladeriaBoton = crearBoton(rutaHeladeria, 160, 180, "Heladerias");
         heladeriaBoton.setEnabled(false);
-        add(heladeriaBoton);
+        this.add(heladeriaBoton);
 
         String rutaCercaMio = "/Interfaz/imagenes/pin.png";
         JButton cercaMioBoton = crearBoton(rutaCercaMio, 310, 180, "CM");
         cercaMioBoton.setEnabled(false);
-        add(cercaMioBoton);
+        this.add(cercaMioBoton);
 
         String rutaBuscador = "/Interfaz/imagenes/lupa.png";
         JButton buscadorBoton = crearBoton(rutaBuscador, 160, 330, "Buscador");
-        add(buscadorBoton);
-
-
-
+        this.add(buscadorBoton);
     }
 
     public JButton crearBoton(String rutaImagen, int x, int y, String tipo) {
         JButton boton = new JButton();
         boton.setBounds(x, y, 150, 150);
-        ImageIcon iconoBoton = new javax.swing.ImageIcon(getClass().getResource(rutaImagen));
-        Image imagen = iconoBoton.getImage();
-        Image resizedImage = imagen.getScaledInstance(boton.getWidth(), boton.getHeight(), 0);
+        Image resizedImage = getImageIcon(rutaImagen, boton);
         boton.setIcon(new ImageIcon(resizedImage));
         boton.setVisible(true);
         final String tipoActividad = tipo;
         boton.addActionListener(new ActionListener() {
-
             //cuando hacen click en el boton, filtra las actividades correspondientes
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean buscador = false;
-                ArrayList<Actividad> actividades = new ArrayList<>();
-                for (int i = 0; i < data.getActividades().size(); i++) {
-                    switch (tipoActividad) {
-                        case "Playas":
-                            actividades = data.getPlayas();
-                            break;
-                        case "Bares":
-                            actividades = data.getBares();
-                            break;
-                        case "Heladerias":
-                            actividades = data.getHeladerias();
-                            break;
-                        case "Favoritos":
-                            actividades = data.getFavoritos();
-                            break;
-                        case "Restaurantes":
-                            actividades = data.getRestaurantes();
-                            break;
-                        case "Buscador":
-                            actividades = data.getActividades();
-                            buscador = true;
-                            break;
-                    }
-                }
-                if (buscador == false) {
-                    MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, true, actividades);
-                    actividad.setVisible(true);
-                }else{
-                    Buscador buscadorVentana = new Buscador(null, true, actividades);
-                    buscadorVentana.setVisible(true);
-                }
-                //throw new UnsupportedOperationException("Not supported yet.");
+
+                ArrayList<Actividad> actividades = filtrarActividades(data, tipoActividad);
+                abrirVentanaCorrespondiente(actividades, tipoActividad);
             }
         });
         return boton;
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
-     */
+    public void abrirVentanaCorrespondiente(ArrayList<Actividad> actividades, String tipoActividad) {
+        boolean buscador = tipoActividad.equals("Buscador");
+        if (buscador == false) {
+            if (actividades.isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "No tienes favoritos todavía");
+            } else {
+                MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, true, actividades);
+                actividad.setVisible(true);
+            }
+
+        } else {
+            Buscador buscadorVentana = new Buscador(null, true, actividades);
+            buscadorVentana.setVisible(true);
+        }
+        //throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public ArrayList<Actividad> filtrarActividades(Sistema data, String tipoActividad) {
+        ArrayList<Actividad> actividades = new ArrayList<>();
+        switch (tipoActividad) {
+            case "Playas":
+                actividades = data.getPlayas();
+                break;
+            case "Bares":
+                actividades = data.getBares();
+                break;
+            case "Heladerias":
+                actividades = data.getHeladerias();
+                break;
+            case "Favoritos":
+                actividades = data.getFavoritos();
+                break;
+            case "Restaurantes":
+                actividades = data.getRestaurantes();
+                break;
+            case "Buscador":
+                actividades = data.getActividades();
+                break;
+        }
+        return actividades;
+    }
+
+    public Image getImageIcon(String rutaImagen, JButton boton) {
+        ImageIcon iconoBoton = new javax.swing.ImageIcon(getClass().getResource(rutaImagen));
+        Image imagen = iconoBoton.getImage();
+        Image resizedImage = imagen.getScaledInstance(boton.getWidth(), boton.getHeight(), 0);
+        return resizedImage;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -149,14 +166,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(591, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addContainerGap(620, Short.MAX_VALUE))
         );
 
         pack();

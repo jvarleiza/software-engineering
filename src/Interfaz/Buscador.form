@@ -81,9 +81,6 @@
           <Image iconType="3" name="/Interfaz/imagenes/2_action_search.png"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buscadorImagenLabelMouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="buscadorTextField">
       <Properties>
