@@ -16,16 +16,14 @@ public class Actividad {
     private String tipo;
     private String nombre;
     private String descripcion;
-    private ArrayList<Comentario> comentarios;
     private boolean favorito;
     private Image img;
     private Image mapa;
 
 
-    public Actividad(String tipo, String nombre, String descripcion, ArrayList<Comentario> comentarios, Image img, Image mapa) {
+    public Actividad(String tipo, String nombre, String descripcion, Image img, Image mapa) {
         this.tipo = tipo;
         this.descripcion = descripcion;
-        this.comentarios = comentarios;
         this.favorito = false;
         this.nombre = nombre;
         this.img = img;
@@ -48,13 +46,6 @@ public class Actividad {
         this.nombre = nombre;
     }
 
-    public ArrayList<Comentario> getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(ArrayList<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
 
     public String getDescripcion() {
         return descripcion;

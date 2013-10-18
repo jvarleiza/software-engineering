@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
  */
 public class ActividadTest {
     
+    
+    Actividad prueba;
     public ActividadTest() {
     }
 
@@ -32,6 +34,7 @@ public class ActividadTest {
     
     @Before
     public void setUp() {
+        prueba = new Actividad("Playa", "Bikini", "playa bikini", null, null);
     }
     
     @After
@@ -92,32 +95,7 @@ public class ActividadTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getComentarios method, of class Actividad.
-     */
-    @Test
-    public void testGetComentarios() {
-        System.out.println("getComentarios");
-        Actividad instance = null;
-        ArrayList expResult = null;
-        ArrayList result = instance.getComentarios();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of setComentarios method, of class Actividad.
-     */
-    @Test
-    public void testSetComentarios() {
-        System.out.println("setComentarios");
-        ArrayList<Comentario> comentarios = null;
-        Actividad instance = null;
-        instance.setComentarios(comentarios);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of getDescripcion method, of class Actividad.

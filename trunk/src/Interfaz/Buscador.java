@@ -29,7 +29,6 @@ public class Buscador extends javax.swing.JDialog {
     public Buscador(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividades) {
         super(parent, modal);
         initComponents();
-        comentariosList.setVisible(false);
         this.getContentPane().setBackground(Color.WHITE);
         this.setResizable(false);
         actividadesLocal = actividades;
@@ -92,8 +91,6 @@ if (nombre.contains(buscar.toLowerCase())) {
         mapaLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descripcionTextArea = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        comentariosList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,13 +121,6 @@ if (nombre.contains(buscar.toLowerCase())) {
         descripcionTextArea.setRows(5);
         jScrollPane2.setViewportView(descripcionTextArea);
 
-        comentariosList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(comentariosList);
-
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
@@ -140,7 +130,6 @@ if (nombre.contains(buscar.toLowerCase())) {
                 .addComponent(nombreLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
             .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
         );
         infoPanelLayout.setVerticalGroup(
@@ -152,8 +141,7 @@ if (nombre.contains(buscar.toLowerCase())) {
                 .addComponent(mapaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,12 +214,10 @@ if (nombre.contains(buscar.toLowerCase())) {
     private javax.swing.JLabel buscadorImagenLabel;
     private javax.swing.JList buscadorList;
     private javax.swing.JTextField buscadorTextField;
-    private javax.swing.JList comentariosList;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel mapaLabel;
     private javax.swing.JLabel nombreLabel;
     // End of variables declaration//GEN-END:variables

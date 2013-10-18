@@ -84,6 +84,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Image resizedImage = getImageIcon(rutaImagen, boton);
         boton.setIcon(new ImageIcon(resizedImage));
         boton.setVisible(true);
+        boton.setToolTipText(tipo);
         final String tipoActividad = tipo;
         boton.addActionListener(new ActionListener() {
             //cuando hacen click en el boton, filtra las actividades correspondientes
