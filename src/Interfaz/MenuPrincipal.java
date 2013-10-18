@@ -113,10 +113,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     }
                 }
                 if (buscador == false) {
-                    MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, false, actividades);
+                    MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, true, actividades);
                     actividad.setVisible(true);
                 }else{
-                    Buscador buscadorVentana = new Buscador(null, false, actividades);
+                    Buscador buscadorVentana = new Buscador(null, true, actividades);
                     buscadorVentana.setVisible(true);
                 }
                 //throw new UnsupportedOperationException("Not supported yet.");
