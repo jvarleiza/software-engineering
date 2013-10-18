@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
  */
 
 public class Informacion {
+    
     public void cargarPlayas(ArrayList<Actividad> listaAct) {
         //URL resource = Sistema.class.getResource("/Interfaz/imagenes/playa_bikini.jpg"); 
         ImageIcon imagenBikini = new javax.swing.ImageIcon(getClass().getResource("/Interfaz/imagenes/playa_bikini_1.jpg"));
