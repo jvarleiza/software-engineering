@@ -26,10 +26,12 @@ import javax.swing.event.ListSelectionListener;
  */
 public class MostrarActividadesPorFiltro extends javax.swing.JDialog {
 private ArrayList<Actividad> actividadLocal;
+private boolean favoritos;
     /** Creates new form prueba */
-    public MostrarActividadesPorFiltro(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividad) {
+    public MostrarActividadesPorFiltro(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividad, boolean fav) {
         super(parent, modal);
         initComponents();
+        favoritos=fav;
         setResizable(false);
         actividadLocal = actividad;
         
@@ -80,7 +82,11 @@ private ArrayList<Actividad> actividadLocal;
 
     public void cargarActividadDefault(ArrayList<Actividad> actividadLocal) {
         String tipoActividad = actividadLocal.get(0).getTipo();
-        tipoLabel.setText(tipoActividad);
+        if(favoritos)
+            tipoLabel.setText("Favoritos");
+        else
+            tipoLabel.setText(tipoActividad);
+            
         nombreLabel.setText(actividadLocal.get(0).getNombre());
         descripcionTextArea.setText(actividadLocal.get(0).getDescripcion());
         Image imagen = actividadLocal.get(0).getImg();
