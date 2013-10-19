@@ -5,10 +5,10 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>grunwaldtvarela</name>
             <source-roots>
-                <root id="src.dir"/>
+                <root id="src.dir" name="grunwaldtvarela"/>
             </source-roots>
             <test-roots>
-                <root id="test.test.dir"/>
+                <root id="test.test.dir" name="Test Packages"/>
             </test-roots>
         </data>
     </configuration>
