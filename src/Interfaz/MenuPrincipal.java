@@ -101,11 +101,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     public void abrirVentanaCorrespondiente(ArrayList<Actividad> actividades, String tipoActividad) {
         boolean buscador = tipoActividad.equals("Buscador");
+        boolean favoritos = tipoActividad.equals("Favoritos");
         if (buscador == false) {
             if (actividades.isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "No tienes favoritos todavía");
             } else {
-                MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, true, actividades);
+                MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, true, actividades, favoritos);
                 actividad.setVisible(true);
             }
 
