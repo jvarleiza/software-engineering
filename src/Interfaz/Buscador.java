@@ -25,6 +25,7 @@ public class Buscador extends javax.swing.JDialog {
 
     private ArrayList<Actividad> actividadesLocal;
     private ArrayList<Actividad> resultados;
+
     /** Creates new form Buscador */
     public Buscador(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividades) {
         super(parent, modal);
@@ -33,9 +34,9 @@ public class Buscador extends javax.swing.JDialog {
         this.setResizable(false);
         actividadesLocal = actividades;
         String[] nombres = getTodosLosNombres(actividades);
-        
+
         buscadorList.setListData(nombres);
-        
+
 
     }
 
@@ -50,20 +51,21 @@ public class Buscador extends javax.swing.JDialog {
 
     public void cargarResultadosPorNombre(String buscar) {
         //buscar solo entre los nombres
-for (int i = 0; i < actividadesLocal.size(); i++) {
-Actividad act = actividadesLocal.get(i);
-String nombre = act.getNombre().toLowerCase();
-if (nombre.contains(buscar.toLowerCase())) {
- resultados.add(act);
-}
-}   }
+        for (int i = 0; i < actividadesLocal.size(); i++) {
+            Actividad act = actividadesLocal.get(i);
+            String nombre = act.getNombre().toLowerCase();
+            if (nombre.contains(buscar.toLowerCase())) {
+                resultados.add(act);
+            }
+        }
+    }
 
     public void cargarResultadosPorNombreYDescripcion(String buscar) {
         for (int i = 0; i < actividadesLocal.size(); i++) {
             Actividad act = actividadesLocal.get(i);
             String nombre = act.getNombre().toLowerCase();
             String descripcion = act.getDescripcion().toLowerCase();
-            if (nombre.contains(buscar.toLowerCase())||descripcion.contains(buscar.toLowerCase())) {
+            if (nombre.contains(buscar.toLowerCase()) || descripcion.contains(buscar.toLowerCase())) {
                 resultados.add(act);
             }
         }
@@ -72,9 +74,9 @@ if (nombre.contains(buscar.toLowerCase())) {
     public void mostrarInfo(Actividad act) {
         nombreLabel.setText(act.getNombre());
         descripcionTextArea.setText(act.getDescripcion());
-        
+
         Image foto = act.getImg();
-        Image resizedMapa = foto.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(),0);
+        Image resizedMapa = foto.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
         mapaLabel.setIcon(new ImageIcon(resizedMapa));
     }
 
@@ -179,37 +181,37 @@ if (nombre.contains(buscar.toLowerCase())) {
         String buscar = buscadorTextField.getText().toLowerCase();
         resultados = new ArrayList<>();
         boolean enter = false;
-        if(evt.getKeyChar()!='\b'){
-            buscar = buscadorTextField.getText()+evt.getKeyChar();
+        if (evt.getKeyChar() != '\b') {
+            buscar = buscadorTextField.getText() + evt.getKeyChar();
         }
-        if(evt.getKeyChar()=='\n'){
+        if (evt.getKeyChar() == '\n') {
             buscar = buscadorTextField.getText();
             enter = true;
         }
-        
-        if (enter==false) {
+
+        if (enter == false) {
             cargarResultadosPorNombre(buscar);
         } else {
             cargarResultadosPorNombreYDescripcion(buscar);
         }
         String[] nombres = getTodosLosNombres(resultados);
         buscadorList.setListData(nombres);
-        
-        
+
+
     }//GEN-LAST:event_buscadorTextFieldKeyTyped
 
     private void buscadorListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscadorListMouseClicked
-        int posActividadSeleccionada = buscadorList.getSelectedIndex();
-        Actividad act;
-        if(resultados!=null){
-            act = resultados.get(posActividadSeleccionada);
-        }else{
-            act = actividadesLocal.get(posActividadSeleccionada);
+        if (!buscadorList.isSelectionEmpty()) {
+            int posActividadSeleccionada = buscadorList.getSelectedIndex();
+            Actividad act;
+            if (resultados != null) {
+                act = resultados.get(posActividadSeleccionada);
+            } else {
+                act = actividadesLocal.get(posActividadSeleccionada);
+            }
+            mostrarInfo(act);
         }
-        mostrarInfo(act);
     }//GEN-LAST:event_buscadorListMouseClicked
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel buscadorImagenLabel;
     private javax.swing.JList buscadorList;

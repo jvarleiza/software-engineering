@@ -98,7 +98,7 @@
                       <Component id="mapaLabel" alignment="0" pref="358" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="nombreLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="150" max="32767" attributes="0"/>
+                          <EmptySpace pref="213" max="32767" attributes="0"/>
                           <Component id="favoritoCheckBox" min="-2" pref="76" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -118,7 +118,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="mapaLabel" min="-2" pref="196" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="287" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="301" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -127,7 +127,7 @@
         <Component class="javax.swing.JLabel" name="nombreLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="MS Gothic" size="36" style="0"/>
+              <Font name="MS Gothic" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>

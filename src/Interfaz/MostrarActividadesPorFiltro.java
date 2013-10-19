@@ -124,7 +124,7 @@ private ArrayList<Actividad> actividadLocal;
 
         infoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 36));
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
         nombreLabel.setText("jLabel1");
 
         descripcionTextArea.setColumns(20);
@@ -156,7 +156,7 @@ private ArrayList<Actividad> actividadLocal;
                     .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addGroup(infoPanelLayout.createSequentialGroup()
                         .addComponent(nombreLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                         .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
@@ -171,7 +171,7 @@ private ArrayList<Actividad> actividadLocal;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mapaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
