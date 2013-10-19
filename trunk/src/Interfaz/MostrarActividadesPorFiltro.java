@@ -34,10 +34,10 @@ private ArrayList<Actividad> actividadLocal;
         actividadLocal = actividad;
         
         this.getContentPane().setBackground(Color.WHITE);
-        cargarActividadDefault(actividad);
+        
         String[] nombres = getNombresActividades();
         listaActividades.setListData(nombres);
-        
+        cargarActividadDefault(actividad);
 
 
         listaActividades.addListSelectionListener(new ListSelectionListener() {
@@ -89,6 +89,8 @@ private ArrayList<Actividad> actividadLocal;
         Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(),0);
         imagenLabel.setIcon(new ImageIcon(resizedImage));
         mapaLabel.setIcon(new ImageIcon(resizedMapa));
+        
+        listaActividades.setSelectedIndex(0);
     }
 
 
