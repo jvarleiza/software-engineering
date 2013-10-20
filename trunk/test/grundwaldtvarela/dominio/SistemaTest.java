@@ -44,50 +44,7 @@ public class SistemaTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getActividades method, of class Sistema.
-     */
-    @Test
-    public void testGetActividadesSistemaVacio() {
-        System.out.println("getActividades - sistema vacio");
-        Sistema instance = new Sistema();
-        ArrayList expResult = null;
-        ArrayList result = instance.getActividades();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setActividades method, of class Sistema.
-     */
-    @Test
-    public void testSetActividades() {
-        System.out.println("setActividades");
-        ArrayList<Actividad> actividades = null;
-        Sistema instance = new Sistema();
-        instance.setActividades(actividades);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of cargarData method, of class Sistema.
-     */
-    @Test
-    public void testCargarData() {
-        System.out.println("cargarData");
-        ArrayList<Actividad> actividad = null;
-        Sistema instance = new Sistema();
-        instance.cargarData(actividad);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getBares method, of class Sistema.
-     */
+  
     @Test
     public void testGetBaresSistemaVacio() {
         System.out.println("getBares - sistema vacio");
@@ -118,23 +75,7 @@ public class SistemaTest {
         //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getHeladerias method, of class Sistema.
-     */
-    @Test
-    public void testGetHeladerias() {
-        System.out.println("getHeladerias");
-        Sistema instance = new Sistema();
-        ArrayList expResult = null;
-        ArrayList result = instance.getHeladerias();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPlayas method, of class Sistema.
-     */
+   
     @Test
     public void testGetPlayasSistemaVacio() {
         System.out.println("getPlayas - sistema vacio");
@@ -207,7 +148,91 @@ public class SistemaTest {
         ArrayList expResult = data.getFavoritos();
         ArrayList result = instance.getFavoritos();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getActividades method, of class Sistema.
+     */
+    @Test
+    public void testGetActividades() {
+        setUp();
+        System.out.println("getActividades");        
+        ArrayList result = data.getActividades();
+        int todasLasActividades = 13;
+        int cantidadResultante = result.size();
+        assertEquals(todasLasActividades, cantidadResultante);
+    }
+
+    /**
+     * Test of getBares method, of class Sistema.
+     */
+    @Test
+    public void testGetBares() {
+        setUp();
+        System.out.println("getBares");
+        //Sistema instance = new Sistema();
+        int expResult = 0;
+        ArrayList lista = data.getBares();
+        int result = lista.size();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of getPlayas method, of class Sistema.
+     */
+    @Test
+    public void testGetPlayas() {
+        setUp();
+        System.out.println("getPlayas");
+        int expResult = 8;
+        ArrayList result = data.getPlayas();
+        assertEquals(expResult, result.size());
+
+    }
+
+    /**
+     * Test of getRestaurantes method, of class Sistema.
+     */
+    @Test
+    public void testGetRestaurantes() {
+        setUp();
+        System.out.println("getRestaurantes");
+        int expResult = 5;
+        ArrayList result = data.getRestaurantes();
+        assertEquals(expResult, result.size());
+
+    }
+
+    /**
+     * Test of getTodosLosNombres method, of class Sistema.
+     */
+    @Test
+    public void testGetTodosLosNombres() {
+        System.out.println("getTodosLosNombres");
+        ArrayList<Actividad> actividades = data.getPlayas();
+        Sistema instance = new Sistema();
+        String[] expResult = null;
+        int totalEsperado = actividades.size();
+        String[] result = instance.getTodosLosNombres(actividades);
+        int totalResultante = result.length;
+        assertEquals(totalEsperado, totalResultante);
+
+    }
+
+    /**
+     * Test of filtrarActividades method, of class Sistema.
+     */
+    @Test
+    public void testFiltrarActividades() {
+        setUp();
+        System.out.println("filtrarActividades");
+        
+        String tipoActividad = "Playas";
+        Sistema instance = new Sistema();
+        ArrayList expResult = data.getPlayas();
+        ArrayList result = instance.filtrarActividades(data, tipoActividad);
+        assertEquals(expResult, result);
+
     }
 }
