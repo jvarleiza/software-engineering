@@ -36,6 +36,7 @@ public class ActividadTest {
     @Before
     public void setUp() {
         prueba = new Actividad("Playa", "Bikini", "playa bikini", null, null);
+        prueba.setFavorito(true);
     }
     
     @After
@@ -47,13 +48,11 @@ public class ActividadTest {
      */
     @Test
     public void testGetMapa() {
+        setUp();
         System.out.println("getMapa");
-        Actividad instance = null;
         Image expResult = null;
-        Image result = instance.getMapa();
+        Image result = prueba.getMapa();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -61,12 +60,18 @@ public class ActividadTest {
      */
     @Test
     public void testSetMapa() {
+        setUp();
         System.out.println("setMapa");
         Image mapa = null;
-        Actividad instance = null;
-        instance.setMapa(mapa);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        prueba.setMapa(mapa);
+        boolean resultado;
+        boolean expResult = true;
+        if(prueba.getMapa()== mapa)
+            resultado = true;
+        else 
+            resultado = false;
+        
+        assertEquals(expResult, resultado);        
     }
 
     /**
@@ -74,13 +79,11 @@ public class ActividadTest {
      */
     @Test
     public void testGetNombre() {
+        setUp();
         System.out.println("getNombre");
-        Actividad instance = null;
-        String expResult = "";
-        String result = instance.getNombre();
+        String expResult = "Bikini";
+        String result = prueba.getNombre();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -88,12 +91,12 @@ public class ActividadTest {
      */
     @Test
     public void testSetNombre() {
+        setUp();
         System.out.println("setNombre");
-        String nombre = "";
-        Actividad instance = null;
-        instance.setNombre(nombre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String nombre = "EL cabo";
+        prueba.setNombre(nombre);
+        
+        assertEquals(prueba.getNombre(), nombre);
     }
 
 
@@ -103,13 +106,11 @@ public class ActividadTest {
      */
     @Test
     public void testGetDescripcion() {
+        setUp();
         System.out.println("getDescripcion");
-        Actividad instance = null;
-        String expResult = "";
-        String result = instance.getDescripcion();
+        String expResult = "playa bikini";
+        String result = prueba.getDescripcion();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -118,11 +119,11 @@ public class ActividadTest {
     @Test
     public void testSetDescripcion() {
         System.out.println("setDescripcion");
-        String descripcion = "";
-        Actividad instance = null;
-        instance.setDescripcion(descripcion);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        setUp();
+        String nombre = "Descr prueba";
+        prueba.setDescripcion(nombre);
+        
+        assertEquals(prueba.getDescripcion(), nombre);
     }
 
     /**
@@ -130,13 +131,11 @@ public class ActividadTest {
      */
     @Test
     public void testIsFavorito() {
+        setUp();
         System.out.println("isFavorito");
-        Actividad instance = null;
-        boolean expResult = false;
-        boolean result = instance.isFavorito();
+        boolean expResult = true;
+        boolean result = prueba.isFavorito();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -144,12 +143,11 @@ public class ActividadTest {
      */
     @Test
     public void testSetFavorito() {
+        setUp();
         System.out.println("setFavorito");
         boolean favorito = false;
-        Actividad instance = null;
-        instance.setFavorito(favorito);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        prueba.setFavorito(favorito);
+        assertEquals(favorito, prueba.isFavorito());
     }
 
     /**
@@ -157,13 +155,11 @@ public class ActividadTest {
      */
     @Test
     public void testGetImg() {
+        setUp();
         System.out.println("getImg");
-        Actividad instance = null;
         Image expResult = null;
-        Image result = instance.getImg();
+        Image result = prueba.getImg();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -171,12 +167,18 @@ public class ActividadTest {
      */
     @Test
     public void testSetImg() {
+        setUp();
         System.out.println("setImg");
         Image img = null;
-        Actividad instance = null;
-        instance.setImg(img);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        prueba.setImg(img);
+        boolean resultado;
+        boolean expResult = true;
+        if(prueba.getImg()== img)
+            resultado = true;
+        else 
+            resultado = false;
+        
+        assertEquals(expResult, resultado);  
     }
 
     /**
@@ -184,13 +186,11 @@ public class ActividadTest {
      */
     @Test
     public void testGetTipo() {
+        setUp();
         System.out.println("getTipo");
-        Actividad instance = null;
-        String expResult = "";
-        String result = instance.getTipo();
+        String expResult = "Playa";
+        String result = prueba.getTipo();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -199,10 +199,10 @@ public class ActividadTest {
     @Test
     public void testSetTipo() {
         System.out.println("setTipo");
-        String tipo = "";
-        Actividad instance = null;
-        instance.setTipo(tipo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        setUp();
+        String nombre = "XXX";
+        prueba.setTipo(nombre);
+        
+        assertEquals(prueba.getTipo(), nombre);
     }
 }
