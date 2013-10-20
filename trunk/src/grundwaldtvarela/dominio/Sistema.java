@@ -87,4 +87,38 @@ public class Sistema {
     }
     
     
+    public String[] getTodosLosNombres(ArrayList<Actividad> actividades) {
+        String[] nombres = new String[actividades.size()];
+        for (int i = 0; i < actividades.size(); i++) {
+            String nombre = actividades.get(i).getNombre();
+            nombres[i] = nombre;
+        }
+        return nombres;
+    }
+    
+    public ArrayList<Actividad> filtrarActividades(Sistema data, String tipoActividad) {
+        ArrayList<Actividad> actividades = new ArrayList<>();
+        switch (tipoActividad) {
+            case "Playas":
+                actividades = data.getPlayas();
+                break;
+            case "Bares":
+                actividades = data.getBares();
+                break;
+            case "Heladerias":
+                actividades = data.getHeladerias();
+                break;
+            case "Favoritos":
+                actividades = data.getFavoritos();
+                break;
+            case "Restaurantes":
+                actividades = data.getRestaurantes();
+                break;
+            case "Buscador":
+                actividades = data.getActividades();
+                break;
+        }
+        return actividades;
+    }
+    
 }

@@ -73,12 +73,7 @@ public class MenuPrincipal extends javax.swing.JDialog {
         String rutaBuscador = "/grundwaldtvarela/imagenes/lupa.png";
         JButton buscadorBoton = crearBoton(rutaBuscador, 160, 330, "Buscador");
         this.add(buscadorBoton);
-    }
-    
-    
-    
-    
-    
+    }   
     
     public JButton crearBoton(String rutaImagen, int x, int y, String tipo) {
         JButton boton = new JButton();
@@ -117,7 +112,7 @@ public class MenuPrincipal extends javax.swing.JDialog {
             }
 
         } else {
-            Buscador buscadorVentana = new Buscador(null, true, actividades);
+            Buscador buscadorVentana = new Buscador(null, true, data);
             buscadorVentana.setVisible(true);
         }
         //throw new UnsupportedOperationException("Not supported yet.");
