@@ -5,6 +5,7 @@
 package grundwaldtvarela.interfaz;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Localidades extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         this.getContentPane().setBackground(Color.WHITE);
+        mensajeLabel.setText("");
     }
 
     /**
@@ -34,6 +36,7 @@ public class Localidades extends javax.swing.JFrame {
         deptosComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        mensajeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,7 +44,7 @@ public class Localidades extends javax.swing.JFrame {
 
         deptosComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Artigas", "Canelones", "Cerro Largo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Montevideo", "Paysandú", "Río Negro", "Rivera", "Rocha", "Salto", "San José", "Soriano", "Tacuarembó", "Treinta y Tres" }));
 
-        jLabel1.setFont(new java.awt.Font("Vivaldi", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Vivaldi", 0, 36));
         jLabel1.setText("Descubre Punta!");
 
         jButton1.setText("Ir");
@@ -50,6 +53,12 @@ public class Localidades extends javax.swing.JFrame {
                 jButton1MouseReleased(evt);
             }
         });
+
+        mensajeLabel.setForeground(new java.awt.Color(255, 0, 0));
+        mensajeLabel.setText("*");
+        mensajeLabel.setMaximumSize(new java.awt.Dimension(6, 14));
+        mensajeLabel.setMinimumSize(new java.awt.Dimension(6, 14));
+        mensajeLabel.setPreferredSize(new java.awt.Dimension(6, 14));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,7 +72,9 @@ public class Localidades extends javax.swing.JFrame {
                         .addComponent(deptosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
-                    .addComponent(mapaLabel))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(mensajeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                        .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -71,11 +82,13 @@ public class Localidades extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(deptosComboBox))
-                .addGap(18, 18, 18)
+                    .addComponent(deptosComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(mensajeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mapaLabel))
         );
 
@@ -86,6 +99,9 @@ public class Localidades extends javax.swing.JFrame {
         if (deptosComboBox.getSelectedIndex() == 8) {
             MenuPrincipal menu = new MenuPrincipal(null, true);
             menu.setVisible(true);
+        }else{
+            String depto = deptosComboBox.getSelectedItem().toString();
+            mensajeLabel.setText("El departamento de "+depto + " no esta disponible en este momento");
         }
     }//GEN-LAST:event_jButton1MouseReleased
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -93,5 +109,6 @@ public class Localidades extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel mapaLabel;
+    private javax.swing.JLabel mensajeLabel;
     // End of variables declaration//GEN-END:variables
 }
