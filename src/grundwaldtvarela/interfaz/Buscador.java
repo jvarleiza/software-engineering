@@ -11,6 +11,7 @@
 package grundwaldtvarela.interfaz;
 
 import grundwaldtvarela.dominio.Actividad;
+import grundwaldtvarela.dominio.Sistema;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -23,30 +24,24 @@ import javax.swing.ImageIcon;
  */
 public class Buscador extends javax.swing.JDialog {
 
+    private Sistema dataLocal;
     private ArrayList<Actividad> actividadesLocal;
     private ArrayList<Actividad> resultados;
+    
 
     /** Creates new form Buscador */
-    public Buscador(java.awt.Frame parent, boolean modal, ArrayList<Actividad> actividades) {
+    public Buscador(java.awt.Frame parent, boolean modal, Sistema data) {
         super(parent, modal);
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.setResizable(false);
-        actividadesLocal = actividades;
-        String[] nombres = getTodosLosNombres(actividades);
+        dataLocal = data;
+        String[] nombres = dataLocal.getTodosLosNombres(data.getActividades());
+        actividadesLocal = dataLocal.getActividades();
 
         buscadorList.setListData(nombres);
 
 
-    }
-
-    public String[] getTodosLosNombres(ArrayList<Actividad> actividades) {
-        String[] nombres = new String[actividades.size()];
-        for (int i = 0; i < actividades.size(); i++) {
-            String nombre = actividades.get(i).getNombre();
-            nombres[i] = nombre;
-        }
-        return nombres;
     }
 
     public void cargarResultadosPorNombre(String buscar) {
@@ -179,6 +174,7 @@ public class Buscador extends javax.swing.JDialog {
 
     private void buscadorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTextFieldKeyTyped
         String buscar = buscadorTextField.getText().toLowerCase();
+        
         resultados = new ArrayList<>();
         boolean enter = false;
         if (evt.getKeyChar() != '\b') {
@@ -194,7 +190,7 @@ public class Buscador extends javax.swing.JDialog {
         } else {
             cargarResultadosPorNombreYDescripcion(buscar);
         }
-        String[] nombres = getTodosLosNombres(resultados);
+        String[] nombres = dataLocal.getTodosLosNombres(resultados);
         buscadorList.setListData(nombres);
 
 
