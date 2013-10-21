@@ -105,7 +105,7 @@ public class MenuPrincipal extends javax.swing.JDialog {
         boolean favoritos = tipoActividad.equals("Favoritos");
         if (buscador == false) {
             if (actividades.isEmpty()) {
-                JOptionPane.showMessageDialog(rootPane, "No tienes favoritos todavía");
+                JOptionPane.showMessageDialog(rootPane, "No tienes favoritos");
             } else {
                 MostrarActividadesPorFiltro actividad = new MostrarActividadesPorFiltro(null, true, actividades, favoritos);
                 actividad.setVisible(true);
