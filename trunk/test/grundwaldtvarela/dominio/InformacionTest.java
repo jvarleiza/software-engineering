@@ -42,26 +42,34 @@ public class InformacionTest {
     /**
      * Test of cargarPlayas method, of class Informacion.
      */
+    
+    //tienen que haber 8 playas ingresadas al sistema
     @Test
     public void testCargarPlayas() {
         System.out.println("cargarPlayas");
-        ArrayList<Actividad> listaAct = null;
+        ArrayList<Actividad> listaAct = new ArrayList<>();
         Informacion instance = new Informacion();
         instance.cargarPlayas(listaAct);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 8;
+        int result = listaAct.size();
+        assertEquals(expResult, result);
+        
     }
 
     /**
      * Test of cargarRestaurantes method, of class Informacion.
      */
+    
+    //tienen que haber 5 restaurantes ingresados al sistema
     @Test
     public void testCargarRestaurantes() {
         System.out.println("cargarRestaurantes");
-        ArrayList<Actividad> listaAct = null;
+        ArrayList<Actividad> listaAct = new ArrayList<>();
         Informacion instance = new Informacion();
         instance.cargarRestaurantes(listaAct);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 5;
+        int result = listaAct.size();
+        assertEquals(expResult, result);
+        
     }
 }

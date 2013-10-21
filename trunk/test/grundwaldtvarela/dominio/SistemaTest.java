@@ -52,8 +52,6 @@ public class SistemaTest {
         ArrayList expResult = new ArrayList();
         ArrayList result = instance.getBares();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
     
     @Test
@@ -71,8 +69,7 @@ public class SistemaTest {
         
         ArrayList result = instance.getBares();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
     }
 
    
@@ -83,8 +80,6 @@ public class SistemaTest {
         ArrayList expResult = new ArrayList();
         ArrayList result = instance.getPlayas();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     @Test
@@ -102,8 +97,6 @@ public class SistemaTest {
         
         ArrayList result = instance.getBares();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
     /**
      * Test of getRestaurantes method, of class Sistema.
@@ -115,8 +108,6 @@ public class SistemaTest {
         ArrayList expResult = new ArrayList();
         ArrayList result = instance.getRestaurantes();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
     
     @Test
@@ -125,7 +116,7 @@ public class SistemaTest {
         Sistema instance = new Sistema();
         instance.cargarData(instance.getActividades());
         ArrayList todasActividades = instance.getActividades();
-        ArrayList expResult = new ArrayList();
+        ArrayList<Actividad> expResult = new ArrayList<>();
         for (int i = 0; i < todasActividades.size(); i++) {
             Actividad a = (Actividad)todasActividades.get(i);
             if(a.getTipo().equals("Restaurantes"))
@@ -134,8 +125,6 @@ public class SistemaTest {
         
         ArrayList result = instance.getRestaurantes();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
