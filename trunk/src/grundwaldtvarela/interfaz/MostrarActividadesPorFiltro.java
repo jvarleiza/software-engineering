@@ -118,7 +118,7 @@ private boolean favoritos;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Actividades");
 
-        tipoLabel.setFont(new java.awt.Font("MS UI Gothic", 0, 36)); // NOI18N
+        tipoLabel.setFont(new java.awt.Font("MS UI Gothic", 0, 36));
         tipoLabel.setText("jLabel1");
 
         listaActividades.setModel(new javax.swing.AbstractListModel() {
@@ -130,7 +130,7 @@ private boolean favoritos;
 
         infoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18));
         nombreLabel.setText("jLabel1");
 
         descripcionTextArea.setColumns(20);
@@ -163,7 +163,7 @@ private boolean favoritos;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +173,7 @@ private boolean favoritos;
                     .addComponent(favoritoCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
-                .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

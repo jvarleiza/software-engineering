@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
@@ -100,7 +100,7 @@
                   <Component id="favoritoCheckBox" min="-2" pref="76" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="mapaLabel" max="32767" attributes="0"/>
+              <Component id="mapaLabel" pref="368" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -112,7 +112,7 @@
                       <Component id="nombreLabel" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                  <Component id="mapaLabel" max="32767" attributes="0"/>
+                  <Component id="mapaLabel" pref="217" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="285" max="-2" attributes="0"/>
               </Group>
