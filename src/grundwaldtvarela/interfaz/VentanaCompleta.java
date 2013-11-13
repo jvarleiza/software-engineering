@@ -32,6 +32,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
     Sistema data;
     ArrayList<Actividad> actividadSeleccionada;
     boolean cambiarEstado;
+    private ArrayList<Actividad> resultados;
 
     /**
      * Creates new form VentanaCompleta
@@ -40,7 +41,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         cambiarEstado = true;
-        favoritosLabel.setText("");
+        //favoritosLabel.setText("");
         //this.setResizable(false);
         //this.setSize(480, 510);
         data = new Sistema();
@@ -159,9 +160,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 listaActividades.setSelectedIndex(0);
                 cargarInfo(0);
                 if (tipoActividad.equals("Favoritos")) {
-                    favoritosLabel.setText("Favoritos");
+                    //favoritosLabel.setText("Favoritos");
                 } else {
-                    favoritosLabel.setText("");
+                    //favoritosLabel.setText("");
                 }
 
                 //abrirVentanaCorrespondiente(actividades, tipoActividad);
@@ -271,7 +272,6 @@ public class VentanaCompleta extends javax.swing.JFrame {
         mapaLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         descripcionTextArea = new javax.swing.JTextArea();
-        favoritosLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -284,7 +284,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaActividades);
 
-        tipoLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        tipoLabel.setFont(new java.awt.Font("MS Gothic", 0, 18));
         tipoLabel.setText("jLabel1");
 
         buscadorTextField.setText("Buscar");
@@ -296,8 +296,13 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 buscadorTextFieldFocusLost(evt);
             }
         });
+        buscadorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscadorTextFieldKeyTyped(evt);
+            }
+        });
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18));
         nombreLabel.setText("jLabel1");
 
         favoritoCheckBox.setText("Favorito");
@@ -314,9 +319,6 @@ public class VentanaCompleta extends javax.swing.JFrame {
         descripcionTextArea.setRows(5);
         jScrollPane3.setViewportView(descripcionTextArea);
 
-        favoritosLabel.setText("Favoritos");
-        favoritosLabel.setToolTipText("");
-
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -327,9 +329,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(favoritosLabel)
-                .addGap(18, 18, 18)
+                .addGap(211, 211, 211)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
@@ -351,37 +351,31 @@ public class VentanaCompleta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 319, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3))
+                                    .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipoLabel)
+                    .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(favoritoCheckBox))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tipoLabel)
-                            .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(favoritoCheckBox))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(favoritosLabel)
-                        .addGap(0, 355, Short.MAX_VALUE)))
+                    .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -426,11 +420,34 @@ public class VentanaCompleta extends javax.swing.JFrame {
         }
         cambiarEstado = true;
     }//GEN-LAST:event_favoritoCheckBoxItemStateChanged
+
+    private void buscadorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTextFieldKeyTyped
+        String buscar = buscadorTextField.getText().toLowerCase();
+        
+        resultados = new ArrayList<>();
+        boolean enter = false;
+        if (evt.getKeyChar() != '\b') {
+            buscar = buscadorTextField.getText() + evt.getKeyChar();
+        }
+        if (evt.getKeyChar() == '\n') {
+            buscar = buscadorTextField.getText();
+            enter = true;
+        }
+
+        if (enter == false) {
+            cargarResultadosPorNombre(buscar);
+        } else {
+            cargarResultadosPorNombreYDescripcion(buscar);
+        }
+        String[] nombres = getNombresActividades(resultados);
+        listaActividades.setListData(nombres);
+
+    }//GEN-LAST:event_buscadorTextFieldKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JCheckBox favoritoCheckBox;
-    private javax.swing.JLabel favoritosLabel;
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -441,4 +458,27 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel tipoLabel;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarResultadosPorNombre(String buscar) {
+        //buscar solo entre los nombres
+        for (int i = 0; i < data.getActividades().size(); i++) {
+            Actividad act = data.getActividades().get(i);
+            String nombre = act.getNombre().toLowerCase();
+            if (nombre.contains(buscar.toLowerCase())) {
+                resultados.add(act);
+            }
+        }
+    }
+
+    public void cargarResultadosPorNombreYDescripcion(String buscar) {
+        for (int i = 0; i < data.getActividades().size(); i++) {
+            Actividad act = data.getActividades().get(i);
+            String nombre = act.getNombre().toLowerCase();
+            String descripcion = act.getDescripcion().toLowerCase();
+            if (nombre.contains(buscar.toLowerCase()) || descripcion.contains(buscar.toLowerCase())) {
+                resultados.add(act);
+            }
+        }
+    }
+
 }
