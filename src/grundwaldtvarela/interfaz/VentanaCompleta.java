@@ -31,21 +31,26 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
     Sistema data;
     ArrayList<Actividad> actividadSeleccionada;
+    boolean cambiarEstado;
 
-    /** Creates new form VentanaCompleta */
+    /**
+     * Creates new form VentanaCompleta
+     */
     public VentanaCompleta() {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
+        cambiarEstado = true;
+        favoritosLabel.setText("");
         //this.setResizable(false);
         //this.setSize(480, 510);
         data = new Sistema();
         data.cargarData(data.getActividades());
+        data.ordenarListaActividades();
         //categoriasScrollPane.setBounds(0, 0, 100, this.getHeight());
         //categoriasScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         cargarVentana(data.getPlayas());
         crearBotonera();
-
         listaActividades.addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -65,25 +70,40 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 // throw new UnsupportedOperationException("Not supported yet.");
             }
         });
-
         listaActividades.setSelectedIndex(0);
 
     }
 
     final public void cargarInfo(int seleccionado) {
-        Image mapa = actividadSeleccionada.get(seleccionado).getMapa();
-        Image imagen = actividadSeleccionada.get(seleccionado).getImg();
-        Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
-        Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), 300, 0);
-        imagenLabel.setIcon(new ImageIcon(resizedImage));
-        mapaLabel.setIcon(new ImageIcon(resizedMapa));
-        nombreLabel.setText(actividadSeleccionada.get(seleccionado).getNombre());
-        String descripcion = actividadSeleccionada.get(seleccionado).getDescripcion();
-        descripcionTextArea.setText(descripcion);
-        favoritoCheckBox.setSelected(actividadSeleccionada.get(seleccionado).isFavorito());
 
-        tipoLabel.setText(actividadSeleccionada.get(seleccionado).getTipo());
-
+        if (actividadSeleccionada.isEmpty()) {
+            tipoLabel.setText("No hay favoritos actualmete.");
+            favoritoCheckBox.setEnabled(false);
+            nombreLabel.setText("");
+            imagenLabel.setEnabled(false);
+            mapaLabel.setEnabled(false);
+            descripcionTextArea.setText("");
+            buscadorTextField.setEnabled(false);
+        } else {
+            favoritoCheckBox.setEnabled(true);
+            imagenLabel.setEnabled(true);
+            mapaLabel.setEnabled(true);
+            buscadorTextField.setEnabled(true);
+            Image mapa = actividadSeleccionada.get(seleccionado).getMapa();
+            Image imagen = actividadSeleccionada.get(seleccionado).getImg();
+            Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
+            Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), 300, 0);
+            imagenLabel.setIcon(new ImageIcon(resizedImage));
+            mapaLabel.setIcon(new ImageIcon(resizedMapa));
+            nombreLabel.setText(actividadSeleccionada.get(seleccionado).getNombre());
+            String descripcion = actividadSeleccionada.get(seleccionado).getDescripcion();
+            descripcionTextArea.setText(descripcion);
+            cambiarEstado = false;
+            favoritoCheckBox.setSelected(actividadSeleccionada.get(seleccionado).isFavorito());
+            cambiarEstado = true;
+            String textTipoLabel = actividadSeleccionada.get(seleccionado).getTipo();
+            tipoLabel.setText(textTipoLabel);
+        }
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -138,6 +158,12 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 cargarVentana(actividades);
                 listaActividades.setSelectedIndex(0);
                 cargarInfo(0);
+                if (tipoActividad.equals("Favoritos")) {
+                    favoritosLabel.setText("Favoritos");
+                } else {
+                    favoritosLabel.setText("");
+                }
+
                 //abrirVentanaCorrespondiente(actividades, tipoActividad);
             }
         });
@@ -245,6 +271,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         mapaLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         descripcionTextArea = new javax.swing.JTextArea();
+        favoritosLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -257,7 +284,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaActividades);
 
-        tipoLabel.setFont(new java.awt.Font("MS UI Gothic", 0, 36));
+        tipoLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
         tipoLabel.setText("jLabel1");
 
         buscadorTextField.setText("Buscar");
@@ -270,7 +297,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18));
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
         nombreLabel.setText("jLabel1");
 
         favoritoCheckBox.setText("Favorito");
@@ -287,6 +314,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
         descripcionTextArea.setRows(5);
         jScrollPane3.setViewportView(descripcionTextArea);
 
+        favoritosLabel.setText("Favoritos");
+        favoritosLabel.setToolTipText("");
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -297,49 +327,61 @@ public class VentanaCompleta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(199, 199, 199)
+                .addGap(148, 148, 148)
+                .addComponent(favoritosLabel)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tipoLabel)
-                                .addGap(300, 300, 300))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(imagenLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tipoLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(7, 7, 7))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(imagenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addComponent(nombreLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nombreLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3))
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipoLabel)
-                    .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(favoritoCheckBox))
-                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                        .addGap(6, 6, 6))
+                        .addContainerGap()
+                        .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tipoLabel)
+                            .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(favoritoCheckBox))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(mapaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                        .addGap(223, 223, 223)
+                        .addComponent(favoritosLabel)
+                        .addGap(0, 355, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -358,21 +400,37 @@ public class VentanaCompleta extends javax.swing.JFrame {
         int seleccionado = listaActividades.getSelectedIndex();
         if (seleccionado < 0) {
             seleccionado = 0;
-        }        
+        }
         Actividad seleccionada = actividadSeleccionada.get(seleccionado);
-        if (!favoritoCheckBox.isSelected()) {
-            String texto = "¿Desea que "+actividadSeleccionada.get(seleccionado).getNombre()+" se eliminada de sus favoritos?";
-            int resultado = JOptionPane.showConfirmDialog(this, texto); 
-            if(resultado == JOptionPane.OK_OPTION)
+        if (cambiarEstado && !favoritoCheckBox.isSelected()) {
+            String texto = "¿Desea eliminar a " + actividadSeleccionada.get(seleccionado).getNombre() + " de sus favoritos?";
+            int resultado = JOptionPane.showConfirmDialog(this, texto);
+            if (resultado == JOptionPane.OK_OPTION) {
                 seleccionada.setFavorito(false);
+                cambiarEstado = false;
+                favoritoCheckBox.setSelected(false);
+
+
+//                if (favoritosLabel.getText().equals("Favoritos") && actividadSeleccionada.isEmpty()) {
+//                    tipoLabel.setText("No hay favoritos actualmete.");
+//                    favoritoCheckBox.setEnabled(false);
+//                    nombreLabel.setText("");
+//                    imagenLabel.setEnabled(false);
+//                    mapaLabel.setEnabled(false);
+//                    descripcionTextArea.setText("");
+//                    buscadorTextField.setEnabled(false);
+//                }
+            }
         } else {
             seleccionada.setFavorito(favoritoCheckBox.isSelected());
         }
+        cambiarEstado = true;
     }//GEN-LAST:event_favoritoCheckBoxItemStateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JCheckBox favoritoCheckBox;
+    private javax.swing.JLabel favoritosLabel;
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
