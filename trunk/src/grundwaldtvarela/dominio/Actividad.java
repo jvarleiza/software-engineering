@@ -5,13 +5,12 @@
 package grundwaldtvarela.dominio;
 
 import java.awt.Image;
-import java.util.ArrayList;
 
 /**
  *
  * @author Palmera
  */
-public class Actividad {
+public class Actividad implements Comparable{
     
     private String tipo;
     private String nombre;
@@ -79,6 +78,9 @@ public class Actividad {
         this.tipo = tipo;
     }
     
-    
+    @Override
+    public int compareTo(Object unaAct){
+        return (((Actividad)unaAct).getNombre().compareTo(this.getNombre()))*(-1);
+    }
     
 }

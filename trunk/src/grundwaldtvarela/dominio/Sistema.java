@@ -3,6 +3,7 @@ package grundwaldtvarela.dominio;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.ImageIcon;
 
 
@@ -22,6 +23,9 @@ public class Sistema {
         this.actividades = actividades;
     }
 
+    public void ordenarListaActividades() {
+        Collections.sort(this.actividades);
+    }
 
     public void cargarData(ArrayList<Actividad> actividad) {
         
