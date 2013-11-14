@@ -35,7 +35,7 @@ public class ActividadTest {
     
     @Before
     public void setUp() {
-        prueba = new Actividad("Playa", "Bikini", "playa bikini", null, null);
+        prueba = new Actividad("Playa", "Bikini", "playa bikini", null, null, 100);
         prueba.setFavorito(true);
     }
     

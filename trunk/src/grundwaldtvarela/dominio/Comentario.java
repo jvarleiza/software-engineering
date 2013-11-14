@@ -33,4 +33,9 @@ public class Comentario {
         this.comentario = comentario;
     }
     
+    @Override
+    public String toString(){
+        return this.usuario + "\n" + this.comentario;
+    }
+    
 }

@@ -11,6 +11,7 @@
 package grundwaldtvarela.interfaz;
 
 import grundwaldtvarela.dominio.Actividad;
+import grundwaldtvarela.dominio.Comentario;
 import grundwaldtvarela.dominio.Sistema;
 import java.awt.Color;
 import java.awt.Image;
@@ -30,9 +31,10 @@ import javax.swing.event.ListSelectionListener;
 public class VentanaCompleta extends javax.swing.JFrame {
 
     Sistema data;
-    ArrayList<Actividad> actividadSeleccionada;
+    ArrayList<Actividad> categoriaSeleccionada;
     boolean cambiarEstado;
     private ArrayList<Actividad> resultados;
+    private Actividad actividadSeleccionada;
 
     /**
      * Creates new form VentanaCompleta
@@ -42,8 +44,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         cambiarEstado = true;
         //favoritosLabel.setText("");
+
+
+
+        // this.setSize(1500, 730);
         //this.setResizable(false);
-        //this.setSize(480, 510);
         data = new Sistema();
         data.cargarData(data.getActividades());
         data.ordenarListaActividades();
@@ -66,43 +71,47 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 if (seleccionado < 0) {
                     seleccionado = 0;
                 }
+                
                 cargarInfo(seleccionado);
+                actividadSeleccionada = categoriaSeleccionada.get(seleccionado);
+                actualizarComentarios();
 
                 // throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         listaActividades.setSelectedIndex(0);
+        actividadSeleccionada = categoriaSeleccionada.get(0);
 
     }
 
     final public void cargarInfo(int seleccionado) {
 
-        if (actividadSeleccionada.isEmpty()) {
+        if (categoriaSeleccionada.isEmpty()) {
             tipoLabel.setText("No hay favoritos actualmete.");
             favoritoCheckBox.setEnabled(false);
             nombreLabel.setText("");
             imagenLabel.setEnabled(false);
             mapaLabel.setEnabled(false);
             descripcionTextArea.setText("");
-            buscadorTextField.setEnabled(false);
+            //buscadorTextField.setEnabled(false);
         } else {
             favoritoCheckBox.setEnabled(true);
             imagenLabel.setEnabled(true);
             mapaLabel.setEnabled(true);
             buscadorTextField.setEnabled(true);
-            Image mapa = actividadSeleccionada.get(seleccionado).getMapa();
-            Image imagen = actividadSeleccionada.get(seleccionado).getImg();
+            Image mapa = categoriaSeleccionada.get(seleccionado).getMapa();
+            Image imagen = categoriaSeleccionada.get(seleccionado).getImg();
             Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
             Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), 300, 0);
             imagenLabel.setIcon(new ImageIcon(resizedImage));
             mapaLabel.setIcon(new ImageIcon(resizedMapa));
-            nombreLabel.setText(actividadSeleccionada.get(seleccionado).getNombre());
-            String descripcion = actividadSeleccionada.get(seleccionado).getDescripcion();
+            nombreLabel.setText(categoriaSeleccionada.get(seleccionado).getNombre());
+            String descripcion = categoriaSeleccionada.get(seleccionado).getDescripcion();
             descripcionTextArea.setText(descripcion);
             cambiarEstado = false;
-            favoritoCheckBox.setSelected(actividadSeleccionada.get(seleccionado).isFavorito());
+            favoritoCheckBox.setSelected(categoriaSeleccionada.get(seleccionado).isFavorito());
             cambiarEstado = true;
-            String textTipoLabel = actividadSeleccionada.get(seleccionado).getTipo();
+            String textTipoLabel = categoriaSeleccionada.get(seleccionado).getTipo();
             tipoLabel.setText(textTipoLabel);
         }
         // throw new UnsupportedOperationException("Not supported yet.");
@@ -129,6 +138,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
             case "Buscador":
                 actividades = data.getActividades();
                 break;
+            case "CM":
+                actividades = data.getCercaMio();
+            break;
         }
         return actividades;
     }
@@ -155,7 +167,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 ArrayList<Actividad> actividades = filtrarActividades(data, tipoActividad);
-                actividadSeleccionada = actividades;
+                categoriaSeleccionada = actividades;
                 cargarVentana(actividades);
                 listaActividades.setSelectedIndex(0);
                 cargarInfo(0);
@@ -237,7 +249,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         String rutaCercaMio = "/grundwaldtvarela/imagenes/pin.png";
         JButton cercaMioBoton = crearBoton(rutaCercaMio, 0, 5 * x, x, "CM");
-        cercaMioBoton.setEnabled(false);
+        //cercaMioBoton.setEnabled(false);
         this.add(cercaMioBoton);
         //categoriasList.add(cercaMioBoton);
         //    todos[5] = cercaMioBoton;
@@ -272,6 +284,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
         mapaLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         descripcionTextArea = new javax.swing.JTextArea();
+        usuarioTextField = new javax.swing.JTextField();
+        comentarioTextField = new javax.swing.JTextField();
+        guardarButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        comentariosList = new javax.swing.JList();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -319,6 +336,36 @@ public class VentanaCompleta extends javax.swing.JFrame {
         descripcionTextArea.setRows(5);
         jScrollPane3.setViewportView(descripcionTextArea);
 
+        usuarioTextField.setText("Usuario");
+        usuarioTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usuarioTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usuarioTextFieldFocusLost(evt);
+            }
+        });
+
+        comentarioTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comentarioTextFieldFocusGained(evt);
+            }
+        });
+
+        guardarButton.setText("Guardar");
+        guardarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarButtonMouseClicked(evt);
+            }
+        });
+
+        comentariosList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(comentariosList);
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -329,13 +376,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(211, 211, 211)
+                .addGap(168, 168, 168)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                        .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -351,12 +396,19 @@ public class VentanaCompleta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreLabel)
-                                .addGap(0, 319, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
-                                .addContainerGap())))))
+                                .addGap(231, 231, 231)
+                                .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(guardarButton)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuarioTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(comentarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,15 +419,24 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tipoLabel)
                     .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(favoritoCheckBox))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comentarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(guardarButton)
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -395,9 +456,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
         if (seleccionado < 0) {
             seleccionado = 0;
         }
-        Actividad seleccionada = actividadSeleccionada.get(seleccionado);
+        Actividad seleccionada = categoriaSeleccionada.get(seleccionado);
         if (cambiarEstado && !favoritoCheckBox.isSelected()) {
-            String texto = "¿Desea eliminar a " + actividadSeleccionada.get(seleccionado).getNombre() + " de sus favoritos?";
+            String texto = "¿Desea eliminar a " + categoriaSeleccionada.get(seleccionado).getNombre() + " de sus favoritos?";
             int resultado = JOptionPane.showConfirmDialog(this, texto);
             if (resultado == JOptionPane.OK_OPTION) {
                 seleccionada.setFavorito(false);
@@ -423,7 +484,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
     private void buscadorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTextFieldKeyTyped
         String buscar = buscadorTextField.getText().toLowerCase();
-        
+
         resultados = new ArrayList<>();
         boolean enter = false;
         if (evt.getKeyChar() != '\b') {
@@ -440,23 +501,51 @@ public class VentanaCompleta extends javax.swing.JFrame {
             cargarResultadosPorNombreYDescripcion(buscar);
         }
         String[] nombres = getNombresActividades(resultados);
+        categoriaSeleccionada = resultados;
         listaActividades.setListData(nombres);
 
     }//GEN-LAST:event_buscadorTextFieldKeyTyped
 
+    private void guardarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarButtonMouseClicked
+        String usuario = usuarioTextField.getText();
+        String comentario = comentarioTextField.getText();
+        actividadSeleccionada.insetarComentario(usuario, comentario);
+        actualizarComentarios();
+        usuarioTextField.setText("Usuario");
+        comentarioTextField.setText("");
+
+    }//GEN-LAST:event_guardarButtonMouseClicked
+
+    private void usuarioTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usuarioTextFieldFocusGained
+        usuarioTextField.setText("");
+    }//GEN-LAST:event_usuarioTextFieldFocusGained
+
+    private void usuarioTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usuarioTextFieldFocusLost
+        
+    }//GEN-LAST:event_usuarioTextFieldFocusLost
+
+    private void comentarioTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextFieldFocusGained
+        comentarioTextField.setText("");
+    }//GEN-LAST:event_comentarioTextFieldFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
+    private javax.swing.JTextField comentarioTextField;
+    private javax.swing.JList comentariosList;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JCheckBox favoritoCheckBox;
+    private javax.swing.JButton guardarButton;
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaActividades;
     private javax.swing.JLabel mapaLabel;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel tipoLabel;
+    private javax.swing.JTextField usuarioTextField;
     // End of variables declaration//GEN-END:variables
 
     public void cargarResultadosPorNombre(String buscar) {
@@ -480,5 +569,14 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         }
     }
-
+    
+    public void actualizarComentarios(){
+        ArrayList<Comentario> comentarios = actividadSeleccionada.recuperarComentarios();
+        String[] com = new String[comentarios.size()];
+        for (int i = 0; i < comentarios.size(); i++) {
+            com[i] = comentarios.get(i).toString();
+        }
+        comentariosList.setListData(com);
+               
+    }
 }

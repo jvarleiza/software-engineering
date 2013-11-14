@@ -5,6 +5,7 @@
 package grundwaldtvarela.dominio;
 
 import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,14 +20,27 @@ public class Actividad implements Comparable{
     private Image img;
     private Image mapa;
 
+    public int getPos() {
+        return pos;
+    }
 
-    public Actividad(String tipo, String nombre, String descripcion, Image img, Image mapa) {
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+    private ArrayList<Comentario> comentarios;
+    private int pos;
+   
+
+
+    public Actividad(String tipo, String nombre, String descripcion, Image img, Image mapa, int pos) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.favorito = false;
         this.nombre = nombre;
         this.img = img;
         this.mapa = mapa;
+        comentarios = new ArrayList<>();
+        this.pos = pos;
     }
 
     public Image getMapa() {
@@ -76,6 +90,17 @@ public class Actividad implements Comparable{
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    
+    
+    public void insetarComentario(String key, String value){
+        Comentario nuevo = new Comentario(key, value);
+        this.comentarios.add(nuevo);
+    }
+    
+    
+    public ArrayList<Comentario> recuperarComentarios(){
+        return this.comentarios;
     }
     
     @Override

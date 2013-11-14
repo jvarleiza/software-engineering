@@ -47,6 +47,18 @@ public class Sistema {
         return retorno;
     }
     
+    public ArrayList<Actividad> getCercaMio(){
+        ArrayList<Actividad> retorno = new ArrayList<>();
+        int x = 50;
+        for (int i = 0; i < this.actividades.size(); i++) {
+            Actividad actividad = this.actividades.get(i);
+            
+            if(actividad.getPos()<x)
+                retorno.add(actividad);
+        }
+        return retorno;
+    }
+    
     public ArrayList<Actividad> getHeladerias(){
         ArrayList<Actividad> retorno = new ArrayList<>();
         for (int i = 0; i < this.actividades.size(); i++) {
