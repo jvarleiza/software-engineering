@@ -35,6 +35,13 @@ public class VentanaCompleta extends javax.swing.JFrame {
     boolean cambiarEstado;
     private ArrayList<Actividad> resultados;
     private Actividad actividadSeleccionada;
+    private JButton playaBoton;
+    private JButton baresBoton;
+    private JButton restaurantesBoton;
+    private JButton favoritosBoton;
+    private JButton heladeriaBoton;
+    private JButton cercaMioBoton;
+    private int botonOprimido;
 
     /**
      * Creates new form VentanaCompleta
@@ -43,10 +50,15 @@ public class VentanaCompleta extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         cambiarEstado = true;
+
+        playaBoton = null;
+        baresBoton = null;
+        restaurantesBoton = null;
+        favoritosBoton = null;
+        heladeriaBoton = null;
+        cercaMioBoton = null;
+
         //favoritosLabel.setText("");
-
-
-
         // this.setSize(1500, 730);
         //this.setResizable(false);
         data = new Sistema();
@@ -71,17 +83,17 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 if (seleccionado < 0) {
                     seleccionado = 0;
                 }
-                
+
                 cargarInfo(seleccionado);
-                actividadSeleccionada = categoriaSeleccionada.get(seleccionado);
+                // actividadSeleccionada = categoriaSeleccionada.get(seleccionado);
                 actualizarComentarios();
 
                 // throw new UnsupportedOperationException("Not supported yet.");
             }
         });
+
         listaActividades.setSelectedIndex(0);
         actividadSeleccionada = categoriaSeleccionada.get(0);
-
     }
 
     final public void cargarInfo(int seleccionado) {
@@ -93,12 +105,27 @@ public class VentanaCompleta extends javax.swing.JFrame {
             imagenLabel.setEnabled(false);
             mapaLabel.setEnabled(false);
             descripcionTextArea.setText("");
-            //buscadorTextField.setEnabled(false);
+            
+            comentarioTextField.setEnabled(false);
+            usuarioTextField.setEnabled(false);
+            comentariosLabel.setText("");
+            String[] s = {""};
+            comentariosList.setListData(s);
+            guardarButton.setEnabled(false);
         } else {
+            //TODO linea agregada recientemente. Observar comportamiento.
+            comentarioTextField.setEnabled(true);
+            usuarioTextField.setEnabled(true);
+            comentariosLabel.setText("Comentarios:");
+            //String[] s = {""};
+            //comentariosList.setListData(s);
+            guardarButton.setEnabled(true);
+            
+            actividadSeleccionada = categoriaSeleccionada.get(seleccionado);
             favoritoCheckBox.setEnabled(true);
             imagenLabel.setEnabled(true);
             mapaLabel.setEnabled(true);
-            buscadorTextField.setEnabled(true);
+            //buscadorTextField.setEnabled(true);
             Image mapa = categoriaSeleccionada.get(seleccionado).getMapa();
             Image imagen = categoriaSeleccionada.get(seleccionado).getImg();
             Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
@@ -140,7 +167,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 break;
             case "CM":
                 actividades = data.getCercaMio();
-            break;
+                break;
         }
         return actividades;
     }
@@ -171,13 +198,60 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 cargarVentana(actividades);
                 listaActividades.setSelectedIndex(0);
                 cargarInfo(0);
-                if (tipoActividad.equals("Favoritos")) {
-                    //favoritosLabel.setText("Favoritos");
-                } else {
-                    //favoritosLabel.setText("");
+                oprimirBoton();
+                switch (tipoActividad) {
+                    case "Playas":
+                        botonOprimido = 1;
+                        playaBoton.setBackground(Color.BLUE);
+                        break;
+                    case "Bares":
+                        botonOprimido = 2;
+                        baresBoton.setBackground(Color.BLUE);
+                        break;
+                    case "Heladerias":
+                        botonOprimido = 5;
+                        heladeriaBoton.setBackground(Color.BLUE);
+                        break;
+                    case "Favoritos":
+                        botonOprimido = 4;
+                        favoritosBoton.setBackground(Color.BLUE);
+                        break;
+                    case "Restaurantes":
+                        botonOprimido = 3;
+                        restaurantesBoton.setBackground(Color.BLUE);
+                        break;
+                    case "Buscador":
+                        botonOprimido = 7;
+                        break;
+                    case "CM":
+                        botonOprimido = 6;
+                        cercaMioBoton.setBackground(Color.BLUE);
+                        break;
                 }
 
                 //abrirVentanaCorrespondiente(actividades, tipoActividad);
+            }
+
+            public void oprimirBoton() {
+                if (playaBoton != null) {
+                    playaBoton.setBackground(Color.WHITE);
+                }
+
+                if (baresBoton != null) {
+                    baresBoton.setBackground(Color.WHITE);
+                }
+                if (restaurantesBoton != null) {
+                    restaurantesBoton.setBackground(Color.WHITE);
+                }
+                if (favoritosBoton != null) {
+                    favoritosBoton.setBackground(Color.WHITE);
+                }
+                if (heladeriaBoton != null) {
+                    heladeriaBoton.setBackground(Color.WHITE);
+                }
+                if (cercaMioBoton != null) {
+                    cercaMioBoton.setBackground(Color.WHITE);
+                }
             }
         });
         return boton;
@@ -195,7 +269,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
     public void cargarVentana(final ArrayList<Actividad> actividades) {
         String[] nombres = getNombresActividades(actividades);
-        listaActividades.setListData(nombres);
+        listaActividades.setListData(nombres);        
         //micargarActividadDefault(actividades);
 
 
@@ -206,11 +280,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
         int x = this.getHeight() / 6;
         //JButton todos [] = new JButton[7];
 
-
         String rutaPlaya = "/grundwaldtvarela/imagenes/playa_icono.png";
-        JButton playaBoton = crearBoton(rutaPlaya, 0, 0 * x, x, "Playas");
+        playaBoton = crearBoton(rutaPlaya, 0, 0 * x, x, "Playas");
         playaBoton.doClick();
         this.add(playaBoton);
+        playaBoton.setName("playaBoton");
 
         //todos[0] = playaBoton;
 
@@ -219,38 +293,43 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
 
         String rutaBares = "/grundwaldtvarela/imagenes/bares_icono.png";
-        JButton baresBoton = crearBoton(rutaBares, 0, 1 * x, x, "Bares");
+        baresBoton = crearBoton(rutaBares, 0, 1 * x, x, "Bares");
         baresBoton.setEnabled(false);
         this.add(baresBoton);
+        playaBoton.setName("baresBoton");
         //categoriasList.add(baresBoton);
 
         //todos[1] = baresBoton;
 
         String rutaRestaurantes = "/grundwaldtvarela/imagenes/restaurantes_icono.png";
-        JButton restaurantesBoton = crearBoton(rutaRestaurantes, 0, 2 * x, x, "Restaurantes");
+        restaurantesBoton = crearBoton(rutaRestaurantes, 0, 2 * x, x, "Restaurantes");
         this.add(restaurantesBoton);
+        playaBoton.setName("restaurantesBoton");
         //categoriasList.add(restaurantesBoton);
         // todos[2] = restaurantesBoton;
 
 
         String rutaFavoritos = "/grundwaldtvarela/imagenes/favoritos_icono.png";
-        JButton favoritosBoton = crearBoton(rutaFavoritos, 0, 3 * x, x, "Favoritos");
+        favoritosBoton = crearBoton(rutaFavoritos, 0, 3 * x, x, "Favoritos");
         this.add(favoritosBoton);
+        playaBoton.setName("favoritosBoton");
         //categoriasList.add(favoritosBoton);
         //   todos[3] = favoritosBoton;
 
         String rutaHeladeria = "/grundwaldtvarela/imagenes/heladeria_icono.png";
-        JButton heladeriaBoton = crearBoton(rutaHeladeria, 0, 4 * x, x, "Heladerias");
+        heladeriaBoton = crearBoton(rutaHeladeria, 0, 4 * x, x, "Heladerias");
         heladeriaBoton.setEnabled(false);
         this.add(heladeriaBoton);
+        playaBoton.setName("heladeriaBoton");
         //categoriasList.add(heladeriaBoton);
 
         //     todos[4] = heladeriaBoton;
 
         String rutaCercaMio = "/grundwaldtvarela/imagenes/pin.png";
-        JButton cercaMioBoton = crearBoton(rutaCercaMio, 0, 5 * x, x, "CM");
+        cercaMioBoton = crearBoton(rutaCercaMio, 0, 5 * x, x, "CM");
         //cercaMioBoton.setEnabled(false);
         this.add(cercaMioBoton);
+        playaBoton.setName("cercaMioBoton");
         //categoriasList.add(cercaMioBoton);
         //    todos[5] = cercaMioBoton;
 
@@ -289,6 +368,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         guardarButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         comentariosList = new javax.swing.JList();
+        comentariosLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -301,7 +381,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaActividades);
 
-        tipoLabel.setFont(new java.awt.Font("MS Gothic", 0, 18));
+        tipoLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
         tipoLabel.setText("jLabel1");
 
         buscadorTextField.setText("Buscar");
@@ -319,7 +399,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18));
+        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
         nombreLabel.setText("jLabel1");
 
         favoritoCheckBox.setText("Favorito");
@@ -346,9 +426,14 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
+        comentarioTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        comentarioTextField.setText("Escriba aquí un comentario sobre la atracción");
         comentarioTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 comentarioTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comentarioTextFieldFocusLost(evt);
             }
         });
 
@@ -359,12 +444,10 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
-        comentariosList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(comentariosList);
+
+        comentariosLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        comentariosLabel.setText("Comentarios:");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -379,7 +462,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 .addGap(168, 168, 168)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                        .addComponent(buscadorTextField)
                         .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,22 +482,28 @@ public class VentanaCompleta extends javax.swing.JFrame {
                                 .addGap(231, 231, 231)
                                 .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
+                                .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(guardarButton)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuarioTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                    .addComponent(comentarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(guardarButton))
+                    .addComponent(usuarioTextField)
+                    .addComponent(comentarioTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comentariosLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comentariosLabel))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tipoLabel)
@@ -464,6 +553,10 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 seleccionada.setFavorito(false);
                 cambiarEstado = false;
                 favoritoCheckBox.setSelected(false);
+                //TODO una vez que se hayan pasado a los botones como atributos de clase, fijarse si el boton Favorito es el que esta seleccionado y entonces darle el refresh() de abajo
+                if (this.botonOprimido == 4) {
+                    actualizarFavoritos();
+                }
 
 
 //                if (favoritosLabel.getText().equals("Favoritos") && actividadSeleccionada.isEmpty()) {
@@ -509,28 +602,50 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private void guardarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarButtonMouseClicked
         String usuario = usuarioTextField.getText();
         String comentario = comentarioTextField.getText();
-        actividadSeleccionada.insetarComentario(usuario, comentario);
-        actualizarComentarios();
+        if(usuarioTextField.getText().equals("Usuario") && comentarioTextField.getText().equals("Escriba aquí un comentario sobre la atracción")){
+            JOptionPane.showMessageDialog(this, "Comentario vacio, intente nuevamente.");
+        }
+        else if(usuarioTextField.getText().equals("Usuario")){
+            JOptionPane.showMessageDialog(this, "Falta introducir el nombre.");
+        }
+        else if(comentarioTextField.getText().equals("Escriba aquí un comentario sobre la atracción")){
+            JOptionPane.showMessageDialog(this, "Falta introducir el comentario.");
+        }
+        else{
+            actividadSeleccionada.insetarComentario(usuario, comentario);
+            actualizarComentarios();
+        }
+        
         usuarioTextField.setText("Usuario");
         comentarioTextField.setText("");
+        comentarioTextField.setText("Escriba aquí un comentario sobre la atracción");
 
     }//GEN-LAST:event_guardarButtonMouseClicked
 
     private void usuarioTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usuarioTextFieldFocusGained
-        usuarioTextField.setText("");
+        if(usuarioTextField.getText().equals("Usuario"))
+            usuarioTextField.setText("");
     }//GEN-LAST:event_usuarioTextFieldFocusGained
 
     private void usuarioTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usuarioTextFieldFocusLost
-        
+        if(usuarioTextField.getText().equals(""))
+            usuarioTextField.setText("Usuario");
     }//GEN-LAST:event_usuarioTextFieldFocusLost
 
     private void comentarioTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextFieldFocusGained
-        comentarioTextField.setText("");
+        if(comentarioTextField.getText().equals("Escriba aquí un comentario sobre la atracción"))
+            comentarioTextField.setText("");
     }//GEN-LAST:event_comentarioTextFieldFocusGained
+
+    private void comentarioTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextFieldFocusLost
+        if(comentarioTextField.getText().equals(""))
+            comentarioTextField.setText("Escriba aquí un comentario sobre la atracción");
+    }//GEN-LAST:event_comentarioTextFieldFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
     private javax.swing.JTextField comentarioTextField;
+    private javax.swing.JLabel comentariosLabel;
     private javax.swing.JList comentariosList;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JCheckBox favoritoCheckBox;
@@ -569,14 +684,25 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         }
     }
-    
-    public void actualizarComentarios(){
+
+    public void actualizarComentarios() {
         ArrayList<Comentario> comentarios = actividadSeleccionada.recuperarComentarios();
         String[] com = new String[comentarios.size()];
         for (int i = 0; i < comentarios.size(); i++) {
             com[i] = comentarios.get(i).toString();
         }
         comentariosList.setListData(com);
-               
+
+    }
+
+    public void actualizarFavoritos() {
+        ArrayList<Actividad> actividades = filtrarActividades(data, "Favoritos");
+        categoriaSeleccionada = actividades;
+        cargarVentana(actividades);
+        if (actividades.isEmpty()) {
+            listaActividades.setSelectedIndex(0);
+        }
+        cargarInfo(0);
+
     }
 }
