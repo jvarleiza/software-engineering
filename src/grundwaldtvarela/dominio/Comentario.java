@@ -35,7 +35,7 @@ public class Comentario {
     
     @Override
     public String toString(){
-        return this.usuario + "\n --->" + this.comentario;
+        return this.usuario + "\n\n\n\n ---> " + this.comentario;
     }
     
 }
