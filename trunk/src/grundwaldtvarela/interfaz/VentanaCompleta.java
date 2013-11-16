@@ -50,6 +50,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         cambiarEstado = true;
+        
+        this.setResizable(false);
+        this.setTitle("Descubra Uruguay");
 
         playaBoton = null;
         baresBoton = null;
@@ -106,7 +109,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             mapaLabel.setEnabled(false);
             descripcionTextArea.setText("");
             
-            comentarioTextField.setEnabled(false);
+            comentarioTextArea.setEnabled(false);
             usuarioTextField.setEnabled(false);
             comentariosLabel.setText("");
             String[] s = {""};
@@ -114,7 +117,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             guardarButton.setEnabled(false);
         } else {
             //TODO linea agregada recientemente. Observar comportamiento.
-            comentarioTextField.setEnabled(true);
+            comentarioTextArea.setEnabled(true);
             usuarioTextField.setEnabled(true);
             comentariosLabel.setText("Comentarios:");
             //String[] s = {""};
@@ -364,11 +367,12 @@ public class VentanaCompleta extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         descripcionTextArea = new javax.swing.JTextArea();
         usuarioTextField = new javax.swing.JTextField();
-        comentarioTextField = new javax.swing.JTextField();
         guardarButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         comentariosList = new javax.swing.JList();
         comentariosLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        comentarioTextArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -426,17 +430,6 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
-        comentarioTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        comentarioTextField.setText("Escriba aquí un comentario sobre la atracción");
-        comentarioTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                comentarioTextFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                comentarioTextFieldFocusLost(evt);
-            }
-        });
-
         guardarButton.setText("Guardar");
         guardarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -448,6 +441,19 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         comentariosLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
         comentariosLabel.setText("Comentarios:");
+
+        comentarioTextArea.setColumns(20);
+        comentarioTextArea.setRows(5);
+        comentarioTextArea.setText("Escriba aquí un comentario sobre la atracción");
+        comentarioTextArea.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comentarioTextAreaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comentarioTextAreaFocusLost(evt);
+            }
+        });
+        jScrollPane4.setViewportView(comentarioTextArea);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -490,11 +496,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(guardarButton))
                     .addComponent(usuarioTextField)
-                    .addComponent(comentarioTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(comentariosLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -521,8 +527,8 @@ public class VentanaCompleta extends javax.swing.JFrame {
                             .addComponent(jScrollPane3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(comentarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(guardarButton)
                         .addGap(17, 17, 17)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
@@ -601,14 +607,14 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
     private void guardarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarButtonMouseClicked
         String usuario = usuarioTextField.getText();
-        String comentario = comentarioTextField.getText();
-        if(usuarioTextField.getText().equals("Usuario") && comentarioTextField.getText().equals("Escriba aquí un comentario sobre la atracción")){
+        String comentario = comentarioTextArea.getText();
+        if(usuarioTextField.getText().equals("Usuario") && comentarioTextArea.getText().equals("Escriba aquí un comentario sobre la atracción")){
             JOptionPane.showMessageDialog(this, "Comentario vacio, intente nuevamente.");
         }
         else if(usuarioTextField.getText().equals("Usuario")){
             JOptionPane.showMessageDialog(this, "Falta introducir el nombre.");
         }
-        else if(comentarioTextField.getText().equals("Escriba aquí un comentario sobre la atracción")){
+        else if(comentarioTextArea.getText().equals("Escriba aquí un comentario sobre la atracción")){
             JOptionPane.showMessageDialog(this, "Falta introducir el comentario.");
         }
         else{
@@ -617,8 +623,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         }
         
         usuarioTextField.setText("Usuario");
-        comentarioTextField.setText("");
-        comentarioTextField.setText("Escriba aquí un comentario sobre la atracción");
+        comentarioTextArea.setText("Escriba aquí un comentario sobre la atracción");
 
     }//GEN-LAST:event_guardarButtonMouseClicked
 
@@ -632,19 +637,19 @@ public class VentanaCompleta extends javax.swing.JFrame {
             usuarioTextField.setText("Usuario");
     }//GEN-LAST:event_usuarioTextFieldFocusLost
 
-    private void comentarioTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextFieldFocusGained
-        if(comentarioTextField.getText().equals("Escriba aquí un comentario sobre la atracción"))
-            comentarioTextField.setText("");
-    }//GEN-LAST:event_comentarioTextFieldFocusGained
+    private void comentarioTextAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextAreaFocusGained
+         if(comentarioTextArea.getText().equals("Escriba aquí un comentario sobre la atracción"))
+            comentarioTextArea.setText("");
+    }//GEN-LAST:event_comentarioTextAreaFocusGained
 
-    private void comentarioTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextFieldFocusLost
-        if(comentarioTextField.getText().equals(""))
-            comentarioTextField.setText("Escriba aquí un comentario sobre la atracción");
-    }//GEN-LAST:event_comentarioTextFieldFocusLost
+    private void comentarioTextAreaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comentarioTextAreaFocusLost
+        if(comentarioTextArea.getText().equals(""))
+            comentarioTextArea.setText("Escriba aquí un comentario sobre la atracción");
+    }//GEN-LAST:event_comentarioTextAreaFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
-    private javax.swing.JTextField comentarioTextField;
+    private javax.swing.JTextArea comentarioTextArea;
     private javax.swing.JLabel comentariosLabel;
     private javax.swing.JList comentariosList;
     private javax.swing.JTextArea descripcionTextArea;
@@ -656,6 +661,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList listaActividades;
     private javax.swing.JLabel mapaLabel;
     private javax.swing.JLabel nombreLabel;
@@ -685,16 +691,30 @@ public class VentanaCompleta extends javax.swing.JFrame {
         }
     }
 
+//    public void actualizarComentarios() {
+//        ArrayList<Comentario> comentarios = actividadSeleccionada.recuperarComentarios();
+//        String[] com = new String[comentarios.size()];
+//        for (int i = 0; i < comentarios.size(); i++) { 
+//            com[i] = comentarios.get(i).toString();
+//        }
+//        comentariosList.setListData(com);
+//    }
+    
+    
     public void actualizarComentarios() {
         ArrayList<Comentario> comentarios = actividadSeleccionada.recuperarComentarios();
-        String[] com = new String[comentarios.size()];
-        for (int i = 0; i < comentarios.size(); i++) {
-            com[i] = comentarios.get(i).toString();
+        ArrayList<String> ret = new ArrayList<>();
+        //String[] com = new String[comentarios.size()];
+        for (int i = 0; i < comentarios.size(); i++) { 
+            String usu = "("+(i+1)+") --- "+comentarios.get(i).getUsuario()+" ---";
+            ret.add(usu);
+            String com = "      "+comentarios.get(i).getComentario();
+            ret.add(com);
         }
-        comentariosList.setListData(com);
-
+        comentariosList.setListData(ret.toArray());
     }
-
+    
+  
     public void actualizarFavoritos() {
         ArrayList<Actividad> actividades = filtrarActividades(data, "Favoritos");
         categoriaSeleccionada = actividades;
