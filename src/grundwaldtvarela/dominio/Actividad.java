@@ -19,6 +19,7 @@ public class Actividad implements Comparable{
     private boolean favorito;
     private Image img;
     private Image mapa;
+    private int pos;
 
     public int getPos() {
         return pos;
@@ -28,7 +29,7 @@ public class Actividad implements Comparable{
         this.pos = pos;
     }
     private ArrayList<Comentario> comentarios;
-    private int pos;
+    
    
 
 

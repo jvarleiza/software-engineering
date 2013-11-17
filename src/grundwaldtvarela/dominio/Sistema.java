@@ -29,7 +29,7 @@ public class Sistema {
 
     public void cargarData(ArrayList<Actividad> actividad) {
         
-        Informacion info = new Informacion();
+        InformacionPuntaDelEste info = new InformacionPuntaDelEste();
         info.cargarPlayas(actividad);
         info.cargarRestaurantes(actividad);
 
