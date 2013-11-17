@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
  * @author Joaquin
  */
 
-public class Informacion {
+public class InformacionPuntaDelEste {
     
     public void cargarPlayas(ArrayList<Actividad> listaAct) {
         //URL resource = Sistema.class.getResource("/Interfaz/imagenes/playa_bikini.jpg"); 
@@ -57,7 +57,7 @@ public class Informacion {
         String desPlayaMontoya = "La playa de montoya es ancha, de arena gruesa y mar con olas de considerable fuerza y altura. "
                 + "Por esta razon es que se lleva a cabo una de las etapas del campeonato mundial del surf. Es muy recomendada "
                 + "entre la gente joven";        
-        Actividad playaMontoya = new Actividad("Playa", "Montoya",desPlayaMontoya,  imagenMontoya.getImage(), mapaMontoya.getImage(), 80);
+        Actividad playaMontoya = new Actividad("Playa", "Montoya",desPlayaMontoya,  imagenMontoya.getImage(), mapaMontoya.getImage(), 120);
         listaAct.add(playaMontoya);
         
         
@@ -98,7 +98,7 @@ public class Informacion {
         ImageIcon imagenLau = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/res_lauberge.jpg"));
         String desLau = "Conocida popularmente como la torre de los waffles es un hotel que ofrece excelente servicio "
                 + "de salón de té muy lujoso. Especial para ir con pareja.";       
-        Actividad lau = new Actividad("Restaurante", "L'Auberge",desLau,  imagenLau.getImage(), mapaLau.getImage(), 20);
+        Actividad lau = new Actividad("Restaurante", "L'Auberge",desLau,  imagenLau.getImage(), mapaLau.getImage(), 60);
         listaAct.add(lau); 
         
         

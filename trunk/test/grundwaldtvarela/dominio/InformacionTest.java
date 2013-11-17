@@ -4,7 +4,7 @@
  */
 package grundwaldtvarela.dominio;
 
-import grundwaldtvarela.dominio.Informacion;
+import grundwaldtvarela.dominio.InformacionPuntaDelEste;
 import grundwaldtvarela.dominio.Actividad;
 import java.util.ArrayList;
 import org.junit.After;
@@ -48,7 +48,7 @@ public class InformacionTest {
     public void testCargarPlayas() {
         System.out.println("cargarPlayas");
         ArrayList<Actividad> listaAct = new ArrayList<>();
-        Informacion instance = new Informacion();
+        InformacionPuntaDelEste instance = new InformacionPuntaDelEste();
         instance.cargarPlayas(listaAct);
         int expResult = 8;
         int result = listaAct.size();
@@ -65,7 +65,7 @@ public class InformacionTest {
     public void testCargarRestaurantes() {
         System.out.println("cargarRestaurantes");
         ArrayList<Actividad> listaAct = new ArrayList<>();
-        Informacion instance = new Informacion();
+        InformacionPuntaDelEste instance = new InformacionPuntaDelEste();
         instance.cargarRestaurantes(listaAct);
         int expResult = 5;
         int result = listaAct.size();

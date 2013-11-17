@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -42,6 +43,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private JButton heladeriaBoton;
     private JButton cercaMioBoton;
     private int botonOprimido;
+    private ButtonGroup ranking;
 
     /**
      * Creates new form VentanaCompleta
@@ -53,6 +55,12 @@ public class VentanaCompleta extends javax.swing.JFrame {
         
         this.setResizable(false);
         this.setTitle("Descubra Uruguay");
+        ranking = new ButtonGroup();
+        ranking.add(this.radioButton1);
+        ranking.add(this.radioButton2);
+        ranking.add(this.radioButton3);
+        ranking.add(this.radioButton4);
+        ranking.add(this.radioButton5);
 
         playaBoton = null;
         baresBoton = null;
@@ -97,6 +105,8 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         listaActividades.setSelectedIndex(0);
         actividadSeleccionada = categoriaSeleccionada.get(0);
+        
+        
     }
 
     final public void cargarInfo(int seleccionado) {
@@ -280,7 +290,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
     }
 
     public void crearBotonera() {
-        int x = this.getHeight() / 6;
+        int x = this.getHeight()/6-8;
         //JButton todos [] = new JButton[7];
 
         String rutaPlaya = "/grundwaldtvarela/imagenes/playa_icono.png";
@@ -373,8 +383,39 @@ public class VentanaCompleta extends javax.swing.JFrame {
         comentariosLabel = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         comentarioTextArea = new javax.swing.JTextArea();
+        radioButton1 = new javax.swing.JRadioButton();
+        radioButton2 = new javax.swing.JRadioButton();
+        radioButton3 = new javax.swing.JRadioButton();
+        radioButton4 = new javax.swing.JRadioButton();
+        radioButton5 = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenu();
+        menuNoreste = new javax.swing.JMenu();
+        riveraMenuItem = new javax.swing.JMenuItem();
+        tacuaremboMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -385,7 +426,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaActividades);
 
-        tipoLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        tipoLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tipoLabel.setText("jLabel1");
 
         buscadorTextField.setText("Buscar");
@@ -403,7 +444,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
-        nombreLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        nombreLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         nombreLabel.setText("jLabel1");
 
         favoritoCheckBox.setText("Favorito");
@@ -416,6 +457,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         descripcionTextArea.setColumns(20);
         descripcionTextArea.setEditable(false);
+        descripcionTextArea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(5);
         jScrollPane3.setViewportView(descripcionTextArea);
@@ -439,10 +481,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(comentariosList);
 
-        comentariosLabel.setFont(new java.awt.Font("MS Gothic", 0, 18)); // NOI18N
+        comentariosLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comentariosLabel.setText("Comentarios:");
 
         comentarioTextArea.setColumns(20);
+        comentarioTextArea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         comentarioTextArea.setRows(5);
         comentarioTextArea.setText("Escriba aquí un comentario sobre la atracción");
         comentarioTextArea.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -455,8 +498,122 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(comentarioTextArea);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        radioButton1.setText("1");
+
+        radioButton2.setText("2");
+
+        radioButton3.setText("3");
+
+        radioButton4.setText("4");
+
+        radioButton5.setText("5");
+
+        menu.setText("Departamentos");
+
+        menuNoreste.setText("Noreste");
+
+        riveraMenuItem.setText("Rivera");
+        riveraMenuItem.setEnabled(false);
+        menuNoreste.add(riveraMenuItem);
+
+        tacuaremboMenuItem.setText("Tacuarembó");
+        tacuaremboMenuItem.setEnabled(false);
+        menuNoreste.add(tacuaremboMenuItem);
+
+        jMenuItem1.setText("Durazno");
+        jMenuItem1.setEnabled(false);
+        menuNoreste.add(jMenuItem1);
+
+        jMenuItem2.setText("Treinta Y Tres");
+        jMenuItem2.setEnabled(false);
+        menuNoreste.add(jMenuItem2);
+
+        jMenuItem3.setText("Cerro Largo");
+        jMenuItem3.setEnabled(false);
+        menuNoreste.add(jMenuItem3);
+
+        menu.add(menuNoreste);
+
+        jMenu2.setText("Noroeste");
+
+        jMenuItem4.setText("Artigas");
+        jMenuItem4.setEnabled(false);
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Salto");
+        jMenuItem5.setEnabled(false);
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Paysandù");
+        jMenuItem6.setEnabled(false);
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("Rio Negro");
+        jMenuItem7.setEnabled(false);
+        jMenu2.add(jMenuItem7);
+
+        menu.add(jMenu2);
+
+        jMenu3.setText("Suroeste");
+
+        jMenuItem8.setText("Soriano");
+        jMenuItem8.setEnabled(false);
+        jMenu3.add(jMenuItem8);
+
+        jMenuItem9.setText("Flores");
+        jMenuItem9.setEnabled(false);
+        jMenu3.add(jMenuItem9);
+
+        jMenuItem10.setText("Florida");
+        jMenuItem10.setEnabled(false);
+        jMenu3.add(jMenuItem10);
+
+        jMenuItem11.setText("San José");
+        jMenuItem11.setEnabled(false);
+        jMenu3.add(jMenuItem11);
+
+        jMenuItem12.setText("Colonia");
+        jMenuItem12.setEnabled(false);
+        jMenu3.add(jMenuItem12);
+
+        menu.add(jMenu3);
+
+        jMenu4.setText("Sureste");
+
+        jMenuItem13.setText("Montevideo");
+        jMenuItem13.setEnabled(false);
+        jMenu4.add(jMenuItem13);
+
+        jMenuItem14.setText("Canelones");
+        jMenuItem14.setEnabled(false);
+        jMenu4.add(jMenuItem14);
+
+        jMenuItem15.setText("Lavalleja");
+        jMenuItem15.setEnabled(false);
+        jMenu4.add(jMenuItem15);
+
+        jMenuItem16.setText("Rocha");
+        jMenuItem16.setEnabled(false);
+        jMenu4.add(jMenuItem16);
+
+        jMenu1.setText("Maldonado");
+
+        jMenuItem17.setText("Punta Del Este");
+        jMenu1.add(jMenuItem17);
+
+        jMenuItem18.setText("Piriapolis");
+        jMenuItem18.setEnabled(false);
+        jMenu1.add(jMenuItem18);
+
+        jMenuItem19.setText("Punta Ballena");
+        jMenuItem19.setEnabled(false);
+        jMenu1.add(jMenuItem19);
+
+        jMenu4.add(jMenu1);
+
+        menu.add(jMenu4);
+
+        jMenuBar1.add(menu);
 
         setJMenuBar(jMenuBar1);
 
@@ -468,7 +625,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 .addGap(168, 168, 168)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buscadorTextField)
+                        .addComponent(buscadorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
                         .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,53 +642,79 @@ public class VentanaCompleta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreLabel)
-                                .addGap(231, 231, 231)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                                 .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3)))
+                            .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(guardarButton))
-                    .addComponent(usuarioTextField)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(usuarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(comentariosLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                        .addGap(0, 166, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                    .addComponent(radioButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radioButton2)
+                            .addComponent(radioButton3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioButton5)
+                                    .addComponent(radioButton4))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                        .addComponent(guardarButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comentariosLabel))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipoLabel)
-                    .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(favoritoCheckBox))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buscadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comentariosLabel))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tipoLabel)
+                            .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(favoritoCheckBox)
+                            .addComponent(nombreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                                    .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioButton1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                        .addComponent(guardarButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(radioButton3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(radioButton4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioButton5)
+                                .addGap(63, 63, 63)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(guardarButton)
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
+                        .addGap(260, 260, 260)
+                        .addComponent(radioButton2)))
                 .addContainerGap())
         );
 
@@ -606,7 +789,14 @@ public class VentanaCompleta extends javax.swing.JFrame {
     }//GEN-LAST:event_buscadorTextFieldKeyTyped
 
     private void guardarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarButtonMouseClicked
-        String usuario = usuarioTextField.getText();
+        int calificacion = obtenerCalificacion();
+        
+        
+        String usuario = usuarioTextField.getText();;
+        if(calificacion != -1)
+            usuario = usuario +" - "+ calificacion + " estrella/s";
+            
+            
         String comentario = comentarioTextArea.getText();
         if(usuarioTextField.getText().equals("Usuario") && comentarioTextArea.getText().equals("Escriba aquí un comentario sobre la atracción")){
             JOptionPane.showMessageDialog(this, "Comentario vacio, intente nuevamente.");
@@ -624,6 +814,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         
         usuarioTextField.setText("Usuario");
         comentarioTextArea.setText("Escriba aquí un comentario sobre la atracción");
+        ranking.clearSelection();
 
     }//GEN-LAST:event_guardarButtonMouseClicked
 
@@ -657,14 +848,45 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList listaActividades;
     private javax.swing.JLabel mapaLabel;
+    private javax.swing.JMenu menu;
+    private javax.swing.JMenu menuNoreste;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JRadioButton radioButton1;
+    private javax.swing.JRadioButton radioButton2;
+    private javax.swing.JRadioButton radioButton3;
+    private javax.swing.JRadioButton radioButton4;
+    private javax.swing.JRadioButton radioButton5;
+    private javax.swing.JMenuItem riveraMenuItem;
+    private javax.swing.JMenuItem tacuaremboMenuItem;
     private javax.swing.JLabel tipoLabel;
     private javax.swing.JTextField usuarioTextField;
     // End of variables declaration//GEN-END:variables
@@ -724,5 +946,19 @@ public class VentanaCompleta extends javax.swing.JFrame {
         }
         cargarInfo(0);
 
+    }
+
+    private int obtenerCalificacion() {
+        if(radioButton1.isSelected())
+            return 1;
+        else if(radioButton2.isSelected())
+            return 2;
+        else if(radioButton3.isSelected())
+            return 3;
+        else if(radioButton4.isSelected())
+            return 4;
+        else if (radioButton5.isSelected()) 
+            return 5;        
+        return -1;
     }
 }
