@@ -331,7 +331,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         String rutaHeladeria = "/grundwaldtvarela/imagenes/heladeria_icono.png";
         heladeriaBoton = crearBoton(rutaHeladeria, 0, 4 * x, x, "Heladerias");
-        heladeriaBoton.setEnabled(false);
+        //heladeriaBoton.setEnabled(false);
         this.add(heladeriaBoton);
         playaBoton.setName("heladeriaBoton");
         //categoriasList.add(heladeriaBoton);
