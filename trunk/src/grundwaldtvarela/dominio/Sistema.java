@@ -30,7 +30,11 @@ public class Sistema {
         InformacionPuntaDelEste info = new InformacionPuntaDelEste();
         info.cargarPlayas(actividad);
         info.cargarRestaurantes(actividad);
+
+        info.cargarBares(actividad);
+
         info.cargarHeladerias(actividad);
+
 
     }
     

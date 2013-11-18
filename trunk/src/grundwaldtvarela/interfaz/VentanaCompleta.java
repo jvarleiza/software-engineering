@@ -142,7 +142,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             Image mapa = categoriaSeleccionada.get(seleccionado).getMapa();
             Image imagen = categoriaSeleccionada.get(seleccionado).getImg();
             Image resizedMapa = mapa.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
-            Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), 300, 0);
+            Image resizedImage = imagen.getScaledInstance(imagenLabel.getWidth(), imagenLabel.getHeight(), 0);
             imagenLabel.setIcon(new ImageIcon(resizedImage));
             mapaLabel.setIcon(new ImageIcon(resizedMapa));
             nombreLabel.setText(categoriaSeleccionada.get(seleccionado).getNombre());
@@ -238,6 +238,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
                         break;
                     case "CM":
                         botonOprimido = 6;
+                        ImageIcon mapaCM = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/mapa_cerca_mio.jpg"));
+                        Image map = mapaCM.getImage().getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), WIDTH);
+                        mapaLabel.setIcon(new ImageIcon(map));
                         cercaMioBoton.setBackground(Color.BLUE);
                         break;
                 }
@@ -291,74 +294,41 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
     public void crearBotonera() {
         int x = this.getHeight()/6-8;
-        //JButton todos [] = new JButton[7];
+        
 
         String rutaPlaya = "/grundwaldtvarela/imagenes/playa_icono.png";
         playaBoton = crearBoton(rutaPlaya, 0, 0 * x, x, "Playas");
         playaBoton.doClick();
         this.add(playaBoton);
         playaBoton.setName("playaBoton");
-
-        //todos[0] = playaBoton;
-
-        //categoriasList.add(playaBoton);
-
-
-
+        
         String rutaBares = "/grundwaldtvarela/imagenes/bares_icono.png";
         baresBoton = crearBoton(rutaBares, 0, 1 * x, x, "Bares");
-        baresBoton.setEnabled(false);
         this.add(baresBoton);
         playaBoton.setName("baresBoton");
-        //categoriasList.add(baresBoton);
 
-        //todos[1] = baresBoton;
 
         String rutaRestaurantes = "/grundwaldtvarela/imagenes/restaurantes_icono.png";
         restaurantesBoton = crearBoton(rutaRestaurantes, 0, 2 * x, x, "Restaurantes");
         this.add(restaurantesBoton);
         playaBoton.setName("restaurantesBoton");
-        //categoriasList.add(restaurantesBoton);
-        // todos[2] = restaurantesBoton;
 
 
         String rutaFavoritos = "/grundwaldtvarela/imagenes/favoritos_icono.png";
-        favoritosBoton = crearBoton(rutaFavoritos, 0, 3 * x, x, "Favoritos");
+        favoritosBoton = crearBoton(rutaFavoritos, 0, 4 * x, x, "Favoritos");
         this.add(favoritosBoton);
         playaBoton.setName("favoritosBoton");
-        //categoriasList.add(favoritosBoton);
-        //   todos[3] = favoritosBoton;
 
         String rutaHeladeria = "/grundwaldtvarela/imagenes/heladeria_icono.png";
-        heladeriaBoton = crearBoton(rutaHeladeria, 0, 4 * x, x, "Heladerias");
-        //heladeriaBoton.setEnabled(false);
+        heladeriaBoton = crearBoton(rutaHeladeria, 0, 3 * x, x, "Heladerias");
         this.add(heladeriaBoton);
         playaBoton.setName("heladeriaBoton");
-        //categoriasList.add(heladeriaBoton);
-
-        //     todos[4] = heladeriaBoton;
 
         String rutaCercaMio = "/grundwaldtvarela/imagenes/pin.png";
         cercaMioBoton = crearBoton(rutaCercaMio, 0, 5 * x, x, "CM");
-        //cercaMioBoton.setEnabled(false);
         this.add(cercaMioBoton);
         playaBoton.setName("cercaMioBoton");
-        //categoriasList.add(cercaMioBoton);
-        //    todos[5] = cercaMioBoton;
 
-//        String rutaBuscador = "/grundwaldtvarela/imagenes/lupa.png";
-//        JButton buscadorBoton = crearBoton(rutaBuscador, 0, 6*x,x, "Buscador");
-//        this.add(buscadorBoton);
-//        //categoriasList.add(buscadorBoton);
-//  //      todos[6] = buscadorBoton;
-
-
-
-
-
-        //pruebaScrollPane.add(prueba,0);
-        //pruebaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        //this.add(prueba);
 
     }
 

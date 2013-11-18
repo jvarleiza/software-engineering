@@ -1,5 +1,5 @@
 
-import grundwaldtvarela.interfaz.Localidades;
+
 import grundwaldtvarela.interfaz.VentanaCompleta;
 
 
