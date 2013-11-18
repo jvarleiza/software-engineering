@@ -127,4 +127,48 @@ public class InformacionPuntaDelEste {
             
     }
     
+    public void cargarHeladerias(ArrayList<Actividad> listaAct){
+        ImageIcon mapaArlecchino = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/mapaArlecchino.jpg"));
+        ImageIcon imagenArlecchino = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/fotoArlecchino.jpg"));
+        String desArlecchino = "La heladería Arlecchino comenzó como el sueño de un matrimonio de italianos "
+                + "y hoy es un lugar de culto en Punta del Este. Desde que abre hasta que cierra el local "
+                + "está lleno de gente que busca un helado artesanal a un precio por debajo del promedio.";       
+        Actividad arlecchino = new Actividad("Heladeria", "Arlecchino",desArlecchino,  imagenArlecchino.getImage(), mapaArlecchino.getImage(), 10);
+        listaAct.add(arlecchino);
+        
+        ImageIcon mapaFaro = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/mapaElFaro.jpg"));
+        ImageIcon fotoFaro = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/fotoElFaro.jpg"));
+        String desFaro = "La legendaria heladería El Faro se encuentra en la península de Punta del Este. Fabricación "
+                + "propia de helados y repostería artesanales. Batidos con tu helado favorito y smoothies de frutas, "
+                + "cafés, chocolates, suizos e infusiones variados de primera calidad. Tartas, bizcochos, galletas, "
+                + "cupcakes y brownies caseros, bollería, sándwiches variados. Refrescos, zumos, gofres y donuts. "
+                + "Repostería creativa personalizada en tartas, galletas, cake-pops y cupcakes (por encargo). "
+                + "Terraza en zona peatonal. Ambiente acogedor y familiar, ideal para familias con niños.";       
+        Actividad elFaro = new Actividad("Heladeria", "El Faro",desFaro,  fotoFaro.getImage(), mapaFaro.getImage(), 10);
+        listaAct.add(elFaro);
+        
+        ImageIcon mapaFredo = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/mapaFredo.jpg"));
+        ImageIcon fotoFredo = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/fotoFredo.jpg"));
+        String desFredo = "Perfil de la empresa:\n"+"\"Somos la cadena de helados artesanales más reconocida de la Argentina. "
+                + "Nuestra fórmula del éxito: la constancia, la calidad de las materias primas que utilizamos y la "
+                + "importancia que damos a nuestro capital humano. En Freddo, combinamos la tradición con las recetas "
+                + "más innovadoras y el talento de nuestros maestros heladeros.\"";       
+        Actividad fredo = new Actividad("Heladeria", "Fredo",desFredo,  fotoFredo.getImage(), mapaFredo.getImage(), 10);
+        listaAct.add(fredo);
+        
+        ImageIcon mapaCigale = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/mapaLaCigale.jpg"));
+        ImageIcon fotoCigale = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/fotoLaCigale.jpg"));
+        String desCigale = "Con su sede en Montevideo y logrando un gran exito a nivel local, La Cigale se instaló en el Punta "
+                + "Shopping en Punta Del Este. Ubicado en Av. Roosevelt, Parada 7, Playa Mansa.";       
+        Actividad cigale = new Actividad("Heladeria", "La Cigale",desCigale,  fotoCigale.getImage(), mapaCigale.getImage(), 10);
+        listaAct.add(cigale);
+        
+        ImageIcon mapaPoppi = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/mapaPoppi.jpg"));
+        ImageIcon fotoPoppi = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/fotoPoppi.jpg"));
+        String desPoppi = "Esta ubicada en Ruta 10 esq. Los Destinos (Balneario La Barra). Comenzó su primer local en La Paloma en el departamento "
+                + "de Rocha y fue debido al buen reconocimiento y la calidad de los helados artesanales que decidieron expanderse "
+                + "por Uruguay.";       
+        Actividad Popi = new Actividad("Heladeria", "Popi",desPoppi,  fotoPoppi.getImage(), mapaPoppi.getImage(), 10);
+        listaAct.add(Popi);
+    }
 }

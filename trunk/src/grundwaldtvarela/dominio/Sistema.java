@@ -1,10 +1,8 @@
 
 package grundwaldtvarela.dominio;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.ImageIcon;
 
 
 public class Sistema {
@@ -32,7 +30,7 @@ public class Sistema {
         InformacionPuntaDelEste info = new InformacionPuntaDelEste();
         info.cargarPlayas(actividad);
         info.cargarRestaurantes(actividad);
-
+        info.cargarHeladerias(actividad);
 
     }
     
