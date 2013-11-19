@@ -68,7 +68,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         data = new Sistema();
         data.cargarData(data.getActividades());
         data.ordenarListaActividades();
-        
+
 
         cargarVentana(data.getPlayas());
         crearBotonera();
@@ -88,9 +88,60 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 actualizarComentarios();
             }
         });
-
         listaActividades.setSelectedIndex(0);
-        actividadSeleccionada = categoriaSeleccionada.get(0);       
+        actividadSeleccionada = categoriaSeleccionada.get(0);
+        inicializarVentana(false);
+
+
+
+    }
+
+    void inicializarVentana(boolean mostrar) {
+        this.playaBoton.setVisible(mostrar);
+        this.baresBoton.setVisible(mostrar);
+        this.restaurantesBoton.setVisible(mostrar);
+        this.heladeriaBoton.setVisible(mostrar);
+        this.cercaMioBoton.setVisible(mostrar);
+        this.favoritosBoton.setVisible(mostrar);
+
+        this.comentarioTextArea.setVisible(mostrar);
+        this.comentariosLabel.setVisible(mostrar);
+        this.guardarButton.setVisible(mostrar);
+        this.comentariosList.setVisible(mostrar);
+        this.usuarioTextField.setVisible(mostrar);
+        this.radioButton1.setVisible(mostrar);
+        this.radioButton2.setVisible(mostrar);
+        this.radioButton3.setVisible(mostrar);
+        this.radioButton4.setVisible(mostrar);
+        this.radioButton5.setVisible(mostrar);
+        this.buscadorTextField.setVisible(mostrar);
+        this.nombreLabel.setVisible(mostrar);
+        this.listaActividades.setVisible(mostrar);
+        this.descripcionTextArea.setVisible(mostrar);
+        this.puntuacionLabel.setVisible(mostrar);
+        //this.mapaLabel.setVisible(mostrar);
+        this.favoritoCheckBox.setVisible(mostrar);
+        if (!mostrar) {
+            this.tipoLabel.setText("Seleccione una localidad para comenzar.");
+            ImageIcon iconoUruguay = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/uruguay_tocado.png"));
+            Image mapa = iconoUruguay.getImage();
+            Image resizedMapa = mapa.getScaledInstance(imagenLabel.getWidth(), imagenLabel.getHeight(), 0);
+            imagenLabel.setIcon(new ImageIcon(resizedMapa));
+            
+            ImageIcon icono2 = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/imagenPrincipal.jpg"));
+            Image imagen = icono2.getImage();
+            Image resized2 = imagen.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
+            mapaLabel.setIcon(new ImageIcon(resized2));
+        } else {
+            this.tipoLabel.setText(actividadSeleccionada.getTipo());
+            Image foto = actividadSeleccionada.getImg();
+            Image resizedMapa = foto.getScaledInstance(imagenLabel.getWidth(), imagenLabel.getHeight(), 0);
+            imagenLabel.setIcon(new ImageIcon(resizedMapa));
+            
+            Image foto2 = actividadSeleccionada.getMapa();
+            Image resized2 = foto2.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
+            mapaLabel.setIcon(new ImageIcon(resized2));
+        }
 
     }
 
@@ -111,12 +162,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
             comentariosList.setListData(s);
             guardarButton.setEnabled(false);
         } else {
-            //TODO linea agregada recientemente. Observar comportamiento.
             comentarioTextArea.setEnabled(true);
             usuarioTextField.setEnabled(true);
             comentariosLabel.setText("Comentarios:");
-            //String[] s = {""};
-            //comentariosList.setListData(s);
             guardarButton.setEnabled(true);
 
             actividadSeleccionada = categoriaSeleccionada.get(seleccionado);
@@ -338,7 +386,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         radioButton3 = new javax.swing.JRadioButton();
         radioButton4 = new javax.swing.JRadioButton();
         radioButton5 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        puntuacionLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu = new javax.swing.JMenu();
         menuNoreste = new javax.swing.JMenu();
@@ -460,9 +508,10 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         radioButton5.setText("5");
 
-        jLabel1.setText("Puntuación");
+        puntuacionLabel.setText("Puntuación");
 
         menu.setText("Departamentos");
+        menu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         menuNoreste.setText("Noreste");
 
@@ -553,6 +602,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
         jMenu1.setText("Maldonado");
 
         puntaDelEsteMenuItem.setText("Punta Del Este");
+        puntaDelEsteMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                puntaDelEsteMenuItemMousePressed(evt);
+            }
+        });
         jMenu1.add(puntaDelEsteMenuItem);
 
         jMenuItem18.setText("Piriapolis");
@@ -622,7 +676,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(radioButton5))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
+                                        .addComponent(puntuacionLabel)
                                         .addGap(129, 129, 129)
                                         .addComponent(guardarButton)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)))
@@ -656,7 +710,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(guardarButton)
-                            .addComponent(jLabel1))
+                            .addComponent(puntuacionLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(radioButton1)
@@ -790,6 +844,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comentarioTextAreaFocusLost
 
+    private void puntaDelEsteMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_puntaDelEsteMenuItemMousePressed
+        this.inicializarVentana(true);
+    }//GEN-LAST:event_puntaDelEsteMenuItemMousePressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
     private javax.swing.JTextArea comentarioTextArea;
@@ -799,7 +856,6 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private javax.swing.JCheckBox favoritoCheckBox;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel imagenLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -833,6 +889,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
     private javax.swing.JMenu menuNoreste;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JMenuItem puntaDelEsteMenuItem;
+    private javax.swing.JLabel puntuacionLabel;
     private javax.swing.JRadioButton radioButton1;
     private javax.swing.JRadioButton radioButton2;
     private javax.swing.JRadioButton radioButton3;
