@@ -63,7 +63,7 @@ public class SistemaTest {
         ArrayList expResult = new ArrayList();
         for (int i = 0; i < todasActividades.size(); i++) {
             Actividad a = (Actividad)todasActividades.get(i);
-            if(a.getTipo().equals("Bares"))
+            if(a.getTipo().equals("Bar"))
                 expResult.add(a);
         }
         
@@ -91,11 +91,11 @@ public class SistemaTest {
         ArrayList expResult = new ArrayList();
         for (int i = 0; i < todasActividades.size(); i++) {
             Actividad a = (Actividad)todasActividades.get(i);
-            if(a.getTipo().equals("Playas"))
+            if(a.getTipo().equals("Playa"))
                 expResult.add(a);
         }
         
-        ArrayList result = instance.getBares();
+        ArrayList result = instance.getPlayas();
         assertEquals(expResult, result);
     }
     /**
@@ -119,7 +119,7 @@ public class SistemaTest {
         ArrayList<Actividad> expResult = new ArrayList<>();
         for (int i = 0; i < todasActividades.size(); i++) {
             Actividad a = (Actividad)todasActividades.get(i);
-            if(a.getTipo().equals("Restaurantes"))
+            if(a.getTipo().equals("Restaurante"))
                 expResult.add(a);
         }
         
@@ -147,7 +147,7 @@ public class SistemaTest {
         setUp();
         System.out.println("getActividades");        
         ArrayList result = data.getActividades();
-        int todasLasActividades = 13;
+        int todasLasActividades = 21;
         int cantidadResultante = result.size();
         assertEquals(todasLasActividades, cantidadResultante);
     }
@@ -160,7 +160,7 @@ public class SistemaTest {
         setUp();
         System.out.println("getBares");
         //Sistema instance = new Sistema();
-        int expResult = 0;
+        int expResult = 3;
         ArrayList lista = data.getBares();
         int result = lista.size();
         assertEquals(expResult, result);
