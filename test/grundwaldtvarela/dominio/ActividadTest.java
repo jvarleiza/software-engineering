@@ -205,4 +205,74 @@ public class ActividadTest {
         
         assertEquals(prueba.getTipo(), nombre);
     }
+
+    /**
+     * Test of getPos method, of class Actividad.
+     */
+    @Test
+    public void testGetPos() {
+        System.out.println("getPos");
+        Actividad instance = null;
+        int expResult = 0;
+        int result = instance.getPos();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setPos method, of class Actividad.
+     */
+    @Test
+    public void testSetPos() {
+        System.out.println("setPos");
+        int pos = 0;
+        Actividad instance = null;
+        instance.setPos(pos);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of insetarComentario method, of class Actividad.
+     */
+    @Test
+    public void testInsetarComentario() {
+        System.out.println("insetarComentario");
+        String key = "";
+        String value = "";
+        Actividad instance = null;
+        instance.insetarComentario(key, value);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of recuperarComentarios method, of class Actividad.
+     */
+    @Test
+    public void testRecuperarComentarios() {
+        System.out.println("recuperarComentarios");
+        Actividad instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.recuperarComentarios();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of compareTo method, of class Actividad.
+     */
+    @Test
+    public void testCompareTo() {
+        System.out.println("compareTo");
+        Object unaAct = null;
+        Actividad instance = null;
+        int expResult = 0;
+        int result = instance.compareTo(unaAct);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

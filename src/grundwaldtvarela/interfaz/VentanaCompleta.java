@@ -90,58 +90,9 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         listaActividades.setSelectedIndex(0);
         actividadSeleccionada = categoriaSeleccionada.get(0);
-        inicializarVentana(false);
+        
 
 
-
-    }
-
-    void inicializarVentana(boolean mostrar) {
-        this.playaBoton.setVisible(mostrar);
-        this.baresBoton.setVisible(mostrar);
-        this.restaurantesBoton.setVisible(mostrar);
-        this.heladeriaBoton.setVisible(mostrar);
-        this.cercaMioBoton.setVisible(mostrar);
-        this.favoritosBoton.setVisible(mostrar);
-
-        this.comentarioTextArea.setVisible(mostrar);
-        this.comentariosLabel.setVisible(mostrar);
-        this.guardarButton.setVisible(mostrar);
-        this.comentariosList.setVisible(mostrar);
-        this.usuarioTextField.setVisible(mostrar);
-        this.radioButton1.setVisible(mostrar);
-        this.radioButton2.setVisible(mostrar);
-        this.radioButton3.setVisible(mostrar);
-        this.radioButton4.setVisible(mostrar);
-        this.radioButton5.setVisible(mostrar);
-        this.buscadorTextField.setVisible(mostrar);
-        this.nombreLabel.setVisible(mostrar);
-        this.listaActividades.setVisible(mostrar);
-        this.descripcionTextArea.setVisible(mostrar);
-        this.puntuacionLabel.setVisible(mostrar);
-        //this.mapaLabel.setVisible(mostrar);
-        this.favoritoCheckBox.setVisible(mostrar);
-        if (!mostrar) {
-            this.tipoLabel.setText("Seleccione una localidad para comenzar.");
-            ImageIcon iconoUruguay = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/uruguay_tocado.png"));
-            Image mapa = iconoUruguay.getImage();
-            Image resizedMapa = mapa.getScaledInstance(imagenLabel.getWidth(), imagenLabel.getHeight(), 0);
-            imagenLabel.setIcon(new ImageIcon(resizedMapa));
-            
-            ImageIcon icono2 = new javax.swing.ImageIcon(getClass().getResource("/grundwaldtvarela/imagenes/imagenPrincipal.jpg"));
-            Image imagen = icono2.getImage();
-            Image resized2 = imagen.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
-            mapaLabel.setIcon(new ImageIcon(resized2));
-        } else {
-            this.tipoLabel.setText(actividadSeleccionada.getTipo());
-            Image foto = actividadSeleccionada.getImg();
-            Image resizedMapa = foto.getScaledInstance(imagenLabel.getWidth(), imagenLabel.getHeight(), 0);
-            imagenLabel.setIcon(new ImageIcon(resizedMapa));
-            
-            Image foto2 = actividadSeleccionada.getMapa();
-            Image resized2 = foto2.getScaledInstance(mapaLabel.getWidth(), mapaLabel.getHeight(), 0);
-            mapaLabel.setIcon(new ImageIcon(resized2));
-        }
 
     }
 
@@ -425,7 +376,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaActividades);
 
-        tipoLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tipoLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
         tipoLabel.setText("jLabel1");
 
         buscadorTextField.setText("Buscar");
@@ -443,7 +394,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
             }
         });
 
-        nombreLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nombreLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
         nombreLabel.setText("jLabel1");
 
         favoritoCheckBox.setText("Favorito");
@@ -456,7 +407,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
 
         descripcionTextArea.setColumns(20);
         descripcionTextArea.setEditable(false);
-        descripcionTextArea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        descripcionTextArea.setFont(new java.awt.Font("Tahoma", 0, 11));
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(5);
         jScrollPane3.setViewportView(descripcionTextArea);
@@ -481,11 +432,11 @@ public class VentanaCompleta extends javax.swing.JFrame {
         comentariosList.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(comentariosList);
 
-        comentariosLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comentariosLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         comentariosLabel.setText("Comentarios:");
 
         comentarioTextArea.setColumns(20);
-        comentarioTextArea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        comentarioTextArea.setFont(new java.awt.Font("Tahoma", 0, 11));
         comentarioTextArea.setRows(5);
         comentarioTextArea.setText("Escriba aquí un comentario sobre la atracción");
         comentarioTextArea.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -511,7 +462,7 @@ public class VentanaCompleta extends javax.swing.JFrame {
         puntuacionLabel.setText("Puntuación");
 
         menu.setText("Departamentos");
-        menu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menu.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
 
         menuNoreste.setText("Noreste");
 
@@ -602,11 +553,6 @@ public class VentanaCompleta extends javax.swing.JFrame {
         jMenu1.setText("Maldonado");
 
         puntaDelEsteMenuItem.setText("Punta Del Este");
-        puntaDelEsteMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                puntaDelEsteMenuItemMousePressed(evt);
-            }
-        });
         jMenu1.add(puntaDelEsteMenuItem);
 
         jMenuItem18.setText("Piriapolis");
@@ -649,11 +595,13 @@ public class VentanaCompleta extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                                 .addComponent(favoritoCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
+                            .addComponent(mapaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -699,12 +647,12 @@ public class VentanaCompleta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
+                            .addComponent(imagenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                            .addComponent(mapaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -844,9 +792,6 @@ public class VentanaCompleta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comentarioTextAreaFocusLost
 
-    private void puntaDelEsteMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_puntaDelEsteMenuItemMousePressed
-        this.inicializarVentana(true);
-    }//GEN-LAST:event_puntaDelEsteMenuItemMousePressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscadorTextField;
     private javax.swing.JTextArea comentarioTextArea;
