@@ -82,16 +82,14 @@ public class ComentarioTest {
     }
 
     /**
-     * Test of toString method, of class Comentario.
+     * Test of equals method, of class Comentario.
      */
-//    @Test
-//    public void testToString() {
-//        System.out.println("toString");
-//        Comentario instance = null;
-//        String expResult = "";
-//        String result = instance.toString();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Comentario o = new Comentario("Juan Miguel Pérez", "Excelente Playa. Me encantó!");
+        Comentario instance = comentario;
+        boolean result = instance.equals(o);
+       assertTrue(result);
+    }
 }

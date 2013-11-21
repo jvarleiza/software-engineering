@@ -212,12 +212,9 @@ public class ActividadTest {
     @Test
     public void testGetPos() {
         System.out.println("getPos");
-        Actividad instance = null;
-        int expResult = 0;
+        Actividad instance = prueba;
         int result = instance.getPos();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(result==100);
     }
 
     /**
@@ -226,11 +223,11 @@ public class ActividadTest {
     @Test
     public void testSetPos() {
         System.out.println("setPos");
-        int pos = 0;
-        Actividad instance = null;
+        int pos = 10;
+        Actividad instance = prueba;
         instance.setPos(pos);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(instance.getPos() == pos);
+        assertFalse(instance.getPos() != pos);
     }
 
     /**
@@ -239,12 +236,12 @@ public class ActividadTest {
     @Test
     public void testInsetarComentario() {
         System.out.println("insetarComentario");
-        String key = "";
-        String value = "";
-        Actividad instance = null;
+        String key = "joaquin";
+        String value = "Bueno!";
+        Actividad instance = prueba;
         instance.insetarComentario(key, value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Comentario com = new Comentario(key, value);
+        assertTrue(instance.recuperarComentarios().contains(com));
     }
 
     /**
@@ -253,12 +250,12 @@ public class ActividadTest {
     @Test
     public void testRecuperarComentarios() {
         System.out.println("recuperarComentarios");
-        Actividad instance = null;
-        ArrayList expResult = null;
-        ArrayList result = instance.recuperarComentarios();
+        Actividad instance = prueba;
+        instance.insetarComentario("Juan", "Bueno!");
+        instance.insetarComentario("joaquin", "Excelente!");
+        int expResult = 2;
+        int result = instance.recuperarComentarios().size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -267,12 +264,10 @@ public class ActividadTest {
     @Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        Object unaAct = null;
-        Actividad instance = null;
+        Actividad unaAct = new Actividad("Playa", "Bikini", "playa bikini", null, null, 100);
+        Actividad instance = prueba;
         int expResult = 0;
         int result = instance.compareTo(unaAct);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 }
