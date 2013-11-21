@@ -9,6 +9,7 @@ package grundwaldtvarela.dominio;
  * @author Palmera
  */
 public class Comentario {
+
     private String usuario;
     private String comentario;
 
@@ -32,10 +33,13 @@ public class Comentario {
         this.usuario = usuario;
         this.comentario = comentario;
     }
-    
+
     //@Override
     //public String toString(){
-     //   return this.usuario + "\n\n\n\n ---> " + this.comentario;
-   // }
-    
+    //   return this.usuario + "\n\n\n\n ---> " + this.comentario;
+    // }
+    @Override
+    public boolean equals(Object o) {
+        return this.usuario.equals(((Comentario) o).getUsuario()) && this.comentario.equals(((Comentario) o).getComentario());
+    }
 }
